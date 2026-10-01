@@ -17,8 +17,9 @@ export const resourceApi = {
 }
 
 export const recruitmentApi = {
-  list: (params?: { page?: number; pageSize?: number; competition_id?: number; keyword?: string; status?: string }) =>
-    request.get<{ recruitments: Recruitment[]; total: number }>('/recruitments', { params }),
+  /** 注意：后端返回的键名是 posts，不是 recruitments */
+  list: (params?: { page?: number; pageSize?: number; competition_id?: number; keyword?: string }) =>
+    request.get<{ posts: Recruitment[]; total: number }>('/recruitments', { params }),
   detail: (id: number | string) => request.get<Recruitment>(`/recruitments/${id}`),
   create: (body: Partial<Recruitment>) => request.post<{ id: number }>('/recruitments', body),
   remove: (id: number) => request.delete(`/recruitments/${id}`),
