@@ -61,11 +61,25 @@ export const awardCertApi = {
 }
 
 export const badgeApi = {
-  all: () => request.get<Badge[]>('/badges/all'),
-  my: () => request.get<Badge[]>('/badges/my'),
-  myAll: () => request.get<{ earned: Badge[]; locked: Badge[] }>('/badges/my/all'),
-  byUser: (userId: number) => request.get<Badge[]>(`/badges/user/${userId}`),
-  check: () => request.post<Badge[]>('/badges/check'),
+  all: () =>
+    request.get<{ badges: Badge[] }>('/badges/all').then((r) => r?.badges ?? []),
+  my: () => request.get<{ badges: Badge[] }>('/badges/my').then((r) => r?.badges ?? []),
+  /** 后端返回 { badges, stats }，badges 里每项带 earned 标记，这里拆成两组 */
+  myAll: () =>
+    request.get<{ badges: Badge[]; stats: any }>('/badges/my/all').then((r) => {
+      const list = r?.badges ?? []
+      return {
+        earned: list.filter((b: any) => b.earned),
+        locked: list.filter((b: any) => !b.earned),
+        stats: r?.stats,
+      }
+    }),
+  byUser: (userId: number) =>
+    request.get<{ badges: Badge[] }>(`/badges/user/${userId}`).then((r) => r?.badges ?? []),
+  check: () =>
+    request
+      .post<{ new_badges: Badge[] }>('/badges/check')
+      .then((r) => r?.new_badges ?? []),
 }
 
 export const teacherCertApi = {

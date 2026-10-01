@@ -29,19 +29,26 @@ export const profileApi = {
 
 export const favoriteApi = {
   list: (params?: { page?: number; pageSize?: number }) =>
-    request.get<{ favorites: Competition[]; total: number }>('/favorites', { params }),
+    request.get<{ favorites: Competition[] }>('/favorites', { params }),
   add: (competitionId: number) => request.post('/favorites', { competition_id: competitionId }),
   remove: (competitionId: number) => request.delete(`/favorites/${competitionId}`),
+  /** 注意：后端返回字段是 is_favorited */
   check: (competitionId: number) =>
-    request.get<{ favorited: boolean }>(`/favorites/check/${competitionId}`),
+    request
+      .get<{ is_favorited: boolean }>(`/favorites/check/${competitionId}`)
+      .then((r) => ({ favorited: !!(r?.is_favorited ?? (r as any)?.favorited) })),
 
-  tags: () => request.get<string[]>('/favorites/tags'),
-  tagsOf: (competitionId: number) => request.get<string[]>(`/favorites/${competitionId}/tags`),
+  tags: () => request.get<{ tags: string[] }>('/favorites/tags').then((r) => r?.tags ?? []),
+  tagsOf: (competitionId: number) =>
+    request.get<{ tags: string[] }>(`/favorites/${competitionId}/tags`).then((r) => r?.tags ?? []),
   addTag: (competitionId: number, tag: string) =>
     request.post(`/favorites/${competitionId}/tags`, { tag }),
   removeTag: (competitionId: number, tag: string) =>
     request.delete(`/favorites/${competitionId}/tags/${encodeURIComponent(tag)}`),
-  byTag: (tag: string) => request.get<Competition[]>(`/favorites/by-tag/${encodeURIComponent(tag)}`),
+  byTag: (tag: string) =>
+    request
+      .get<{ favorites: Competition[] }>(`/favorites/by-tag/${encodeURIComponent(tag)}`)
+      .then((r) => r?.favorites ?? []),
 }
 
 export const notificationApi = {
@@ -57,16 +64,20 @@ export const notificationApi = {
 }
 
 export const timelineApi = {
-  my: (params?: { page?: number; pageSize?: number }) =>
-    request.get<{ items: any[]; total: number }>('/timeline/my', { params }),
-  myGrowth: () => request.get<any[]>('/timeline/my/growth'),
-  myMilestones: () => request.get<any[]>('/timeline/my/milestones'),
+  my: () => request.get<{ timeline: any[] }>('/timeline/my').then((r) => r?.timeline ?? []),
+  myGrowth: () => request.get<{ growth: any[] }>('/timeline/my/growth').then((r) => r?.growth ?? []),
+  myMilestones: () =>
+    request.get<{ milestones: any[] }>('/timeline/my/milestones').then((r) => r?.milestones ?? []),
   myStats: () => request.get<any>('/timeline/my/stats'),
 
-  byUser: (userId: number | string, params?: any) =>
-    request.get<{ items: any[]; total: number }>(`/timeline/user/${userId}`, { params }),
-  userGrowth: (userId: number | string) => request.get<any[]>(`/timeline/user/${userId}/growth`),
-  userMilestones: (userId: number | string) => request.get<any[]>(`/timeline/user/${userId}/milestones`),
+  byUser: (userId: number | string) =>
+    request.get<{ timeline: any[] }>(`/timeline/user/${userId}`).then((r) => r?.timeline ?? []),
+  userGrowth: (userId: number | string) =>
+    request.get<{ growth: any[] }>(`/timeline/user/${userId}/growth`).then((r) => r?.growth ?? []),
+  userMilestones: (userId: number | string) =>
+    request
+      .get<{ milestones: any[] }>(`/timeline/user/${userId}/milestones`)
+      .then((r) => r?.milestones ?? []),
   userStats: (userId: number | string) => request.get<any>(`/timeline/user/${userId}/stats`),
 }
 

@@ -1,11 +1,18 @@
-import PagePlaceholder from '@/components/PagePlaceholder'
+import { useNavigate } from 'react-router-dom'
+import { Button, Result } from 'antd'
 
 export default function NotFound() {
+  const navigate = useNavigate()
   return (
-    <PagePlaceholder
-      title="页面不存在"
-      description="请检查地址是否正确"
-      endpoints={[]}
+    <Result
+      status="404"
+      title="404"
+      subTitle="抱歉，你访问的页面不存在或已被移除。"
+      extra={
+        <Button type="primary" onClick={() => navigate('/dashboard')}>
+          返回首页
+        </Button>
+      }
     />
   )
 }
