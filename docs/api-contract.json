@@ -1,0 +1,2614 @@
+{
+  "generated": "2026-10-01T16:32:21.815Z",
+  "count": 326,
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/activities/:id",
+      "module": "activities",
+      "auth": false,
+      "admin": false,
+      "line": 35
+    },
+    {
+      "method": "GET",
+      "path": "/api/activities/following",
+      "module": "activities",
+      "auth": true,
+      "admin": false,
+      "line": 27
+    },
+    {
+      "method": "GET",
+      "path": "/api/activities/my",
+      "module": "activities",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/activities/user/:userId",
+      "module": "activities",
+      "auth": false,
+      "admin": false,
+      "line": 19
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/:type/:id/restore",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 316
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/announcements",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 116
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/awards",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 75
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/awards",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 86
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/awards/:id",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 106
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/awards/batch",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 96
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/competitions",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 18
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/competitions",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 34
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/competitions/:id",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 128
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/competitions/:id",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 44
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/dashboard-stats",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 157
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/export",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 167
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/logs",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 144
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/reviews",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 180
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/reviews/:type/:id",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 208
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/reviews/:type/:id/approve",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 228
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/reviews/:type/:id/reject",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 256
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/reviews/batch-approve",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 284
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/reviews/stats",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 198
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/upload/proof",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 294
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/users",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 54
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/users/:id/role",
+      "module": "admin",
+      "auth": true,
+      "admin": true,
+      "line": 65
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/chat",
+      "module": "ai",
+      "auth": false,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/chat/stream",
+      "module": "ai",
+      "auth": false,
+      "admin": false,
+      "line": 38
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/history",
+      "module": "ai",
+      "auth": true,
+      "admin": false,
+      "line": 87
+    },
+    {
+      "method": "POST",
+      "path": "/api/ai/history",
+      "module": "ai",
+      "auth": true,
+      "admin": false,
+      "line": 75
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/ai/history/:id",
+      "module": "ai",
+      "auth": true,
+      "admin": false,
+      "line": 114
+    },
+    {
+      "method": "GET",
+      "path": "/api/ai/history/:id",
+      "module": "ai",
+      "auth": true,
+      "admin": false,
+      "line": 98
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/forgot-password",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 92
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 72
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login-code",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 216
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "module": "auth",
+      "auth": true,
+      "admin": false,
+      "line": 88
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 56
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/reset-password",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 164
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/send-code",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 205
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/verify-reset-code",
+      "module": "auth",
+      "auth": false,
+      "admin": false,
+      "line": 132
+    },
+    {
+      "method": "GET",
+      "path": "/api/award-certs",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 20
+    },
+    {
+      "method": "POST",
+      "path": "/api/award-certs",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 81
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/award-certs/:id",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 109
+    },
+    {
+      "method": "GET",
+      "path": "/api/award-certs/:id",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 68
+    },
+    {
+      "method": "GET",
+      "path": "/api/award-certs/:id/render",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 55
+    },
+    {
+      "method": "POST",
+      "path": "/api/award-certs/auto-generate",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 98
+    },
+    {
+      "method": "GET",
+      "path": "/api/award-certs/stats",
+      "module": "awardCert",
+      "auth": true,
+      "admin": false,
+      "line": 31
+    },
+    {
+      "method": "GET",
+      "path": "/api/award-certs/verify/:certNumber",
+      "module": "awardCert",
+      "auth": false,
+      "admin": false,
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/api/badges/all",
+      "module": "badges",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/badges/check",
+      "module": "badges",
+      "auth": true,
+      "admin": false,
+      "line": 29
+    },
+    {
+      "method": "GET",
+      "path": "/api/badges/my",
+      "module": "badges",
+      "auth": true,
+      "admin": false,
+      "line": 15
+    },
+    {
+      "method": "GET",
+      "path": "/api/badges/my/all",
+      "module": "badges",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/api/badges/user/:userId",
+      "module": "badges",
+      "auth": false,
+      "admin": false,
+      "line": 41
+    },
+    {
+      "method": "POST",
+      "path": "/api/cert-plans",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/cert-plans/:certificateId",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 32
+    },
+    {
+      "method": "PUT",
+      "path": "/api/cert-plans/:certificateId",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 28
+    },
+    {
+      "method": "POST",
+      "path": "/api/cert-plans/:certificateId/checkin",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 37
+    },
+    {
+      "method": "GET",
+      "path": "/api/cert-plans/:certificateId/checkins",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 49
+    },
+    {
+      "method": "GET",
+      "path": "/api/cert-plans/my",
+      "module": "certPlans",
+      "auth": true,
+      "admin": false,
+      "line": 24
+    },
+    {
+      "method": "GET",
+      "path": "/api/certificates",
+      "module": "certificates",
+      "auth": false,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/certificates/:id",
+      "module": "certificates",
+      "auth": false,
+      "admin": false,
+      "line": 25
+    },
+    {
+      "method": "GET",
+      "path": "/api/certificates/categories",
+      "module": "certificates",
+      "auth": false,
+      "admin": false,
+      "line": 20
+    },
+    {
+      "method": "GET",
+      "path": "/api/colleges",
+      "module": "colleges",
+      "auth": false,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/colleges/:id/competitions",
+      "module": "colleges",
+      "auth": false,
+      "admin": false,
+      "line": 40
+    },
+    {
+      "method": "GET",
+      "path": "/api/colleges/:id/majors",
+      "module": "colleges",
+      "auth": false,
+      "admin": false,
+      "line": 20
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions",
+      "module": "competitions",
+      "auth": false,
+      "admin": false,
+      "line": 32
+    },
+    {
+      "method": "POST",
+      "path": "/api/competitions",
+      "module": "competitions",
+      "auth": true,
+      "admin": false,
+      "line": 97
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id",
+      "module": "competitions",
+      "auth": false,
+      "admin": false,
+      "line": 60
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/awards",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 131
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/difficulty",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 39
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/group-info",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 63
+    },
+    {
+      "method": "PUT",
+      "path": "/api/competitions/:id/group-info",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 79
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/my-review",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 235
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/prep-plan",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 51
+    },
+    {
+      "method": "PUT",
+      "path": "/api/competitions/:id/registration-url",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 102
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/related",
+      "module": "competitions",
+      "auth": false,
+      "admin": false,
+      "line": 87
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/competitions/:id/reviews",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 218
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/reviews",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 152
+    },
+    {
+      "method": "POST",
+      "path": "/api/competitions/:id/reviews",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 186
+    },
+    {
+      "method": "POST",
+      "path": "/api/competitions/:id/stages",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 248
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/competitions/:id/stages/:stageId",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 288
+    },
+    {
+      "method": "PUT",
+      "path": "/api/competitions/:id/stages/:stageId",
+      "module": "competitionExtras",
+      "auth": true,
+      "admin": false,
+      "line": 270
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/:id/timeline",
+      "module": "competitionExtras",
+      "auth": false,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/categories",
+      "module": "competitions",
+      "auth": false,
+      "admin": false,
+      "line": 13
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/compare",
+      "module": "competitionCompare",
+      "auth": false,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/competitions/deadline-soon",
+      "module": "competitions",
+      "auth": false,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/dashboard",
+      "module": "dashboard",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/active-users",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 84
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/award-distribution",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 47
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/competitions-by-category",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 20
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/hot-competitions",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 74
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/overview",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/participants-by-category",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 29
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/participants-by-college",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 38
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/registration-trend",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 56
+    },
+    {
+      "method": "GET",
+      "path": "/api/data-dashboard/user-growth",
+      "module": "dataDashboard",
+      "auth": false,
+      "admin": false,
+      "line": 65
+    },
+    {
+      "method": "GET",
+      "path": "/api/export/:dataType",
+      "module": "export",
+      "auth": true,
+      "admin": false,
+      "line": 64
+    },
+    {
+      "method": "GET",
+      "path": "/api/export/admin/batch",
+      "module": "export",
+      "auth": true,
+      "admin": true,
+      "line": 28
+    },
+    {
+      "method": "GET",
+      "path": "/api/favorites",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 53
+    },
+    {
+      "method": "POST",
+      "path": "/api/favorites",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/favorites/:competitionId",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 34
+    },
+    {
+      "method": "GET",
+      "path": "/api/favorites/:competitionId/tags",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 129
+    },
+    {
+      "method": "POST",
+      "path": "/api/favorites/:competitionId/tags",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 81
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/favorites/:competitionId/tags/:tag",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 109
+    },
+    {
+      "method": "GET",
+      "path": "/api/favorites/by-tag/:tag",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 75
+    },
+    {
+      "method": "GET",
+      "path": "/api/favorites/check/:competitionId",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 60
+    },
+    {
+      "method": "GET",
+      "path": "/api/favorites/tags",
+      "module": "favorites",
+      "auth": true,
+      "admin": false,
+      "line": 70
+    },
+    {
+      "method": "POST",
+      "path": "/api/feedback",
+      "module": "feedback",
+      "auth": false,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "GET",
+      "path": "/api/feedback/admin",
+      "module": "feedback",
+      "auth": true,
+      "admin": true,
+      "line": 39
+    },
+    {
+      "method": "POST",
+      "path": "/api/feedback/admin/:id/reply",
+      "module": "feedback",
+      "auth": true,
+      "admin": true,
+      "line": 60
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/feedback/admin/:id/status",
+      "module": "feedback",
+      "auth": true,
+      "admin": true,
+      "line": 49
+    },
+    {
+      "method": "GET",
+      "path": "/api/feedback/my",
+      "module": "feedback",
+      "auth": true,
+      "admin": false,
+      "line": 31
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/follows/:userId",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 35
+    },
+    {
+      "method": "POST",
+      "path": "/api/follows/:userId",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/:userId/counts",
+      "module": "follows",
+      "auth": false,
+      "admin": false,
+      "line": 115
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/:userId/followers",
+      "module": "follows",
+      "auth": false,
+      "admin": false,
+      "line": 88
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/:userId/following",
+      "module": "follows",
+      "auth": false,
+      "admin": false,
+      "line": 74
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/:userId/status",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 128
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/check/:userId",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 102
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/followers",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 61
+    },
+    {
+      "method": "GET",
+      "path": "/api/follows/following",
+      "module": "follows",
+      "auth": true,
+      "admin": false,
+      "line": 48
+    },
+    {
+      "method": "GET",
+      "path": "/api/growth-report",
+      "module": "growthReport",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/kanban/task/:taskId",
+      "module": "kanban",
+      "auth": true,
+      "admin": false,
+      "line": 89
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/kanban/task/:taskId",
+      "module": "kanban",
+      "auth": true,
+      "admin": false,
+      "line": 66
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/kanban/task/:taskId/status",
+      "module": "kanban",
+      "auth": true,
+      "admin": false,
+      "line": 45
+    },
+    {
+      "method": "GET",
+      "path": "/api/kanban/team/:teamId",
+      "module": "kanban",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/kanban/team/:teamId",
+      "module": "kanban",
+      "auth": true,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/lobby/messages",
+      "module": "lobby",
+      "auth": false,
+      "admin": false,
+      "line": 13
+    },
+    {
+      "method": "POST",
+      "path": "/api/lobby/messages",
+      "module": "lobby",
+      "auth": true,
+      "admin": false,
+      "line": 25
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/lobby/messages/:id",
+      "module": "lobby",
+      "auth": true,
+      "admin": false,
+      "line": 63
+    },
+    {
+      "method": "GET",
+      "path": "/api/majors/:id/competitions",
+      "module": "majors",
+      "auth": false,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors",
+      "module": "mentor",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/:id",
+      "module": "mentor",
+      "auth": false,
+      "admin": false,
+      "line": 55
+    },
+    {
+      "method": "POST",
+      "path": "/api/mentors/:id/request",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 88
+    },
+    {
+      "method": "POST",
+      "path": "/api/mentors/:id/review",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 131
+    },
+    {
+      "method": "POST",
+      "path": "/api/mentors/apply",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 66
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/my/applications",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 30
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/my/info",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 18
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/my/mentees",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 36
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/my/mentors",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/api/mentors/my/requests",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 24
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/mentors/my/status",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 48
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/mentors/request/:id",
+      "module": "mentor",
+      "auth": true,
+      "admin": false,
+      "line": 115
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 20
+    },
+    {
+      "method": "POST",
+      "path": "/api/notebook",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 69
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/notebook/:id",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 97
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook/:id",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 55
+    },
+    {
+      "method": "PUT",
+      "path": "/api/notebook/:id",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 83
+    },
+    {
+      "method": "POST",
+      "path": "/api/notebook/:id/pin",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 111
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook/search",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 32
+    },
+    {
+      "method": "GET",
+      "path": "/api/notebook/stats",
+      "module": "notebook",
+      "auth": true,
+      "admin": false,
+      "line": 44
+    },
+    {
+      "method": "GET",
+      "path": "/api/notifications",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/notifications/:id",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 70
+    },
+    {
+      "method": "PUT",
+      "path": "/api/notifications/:id/read",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 28
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/notifications/all",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 60
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/notifications/batch",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 46
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/notifications/read",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 65
+    },
+    {
+      "method": "PUT",
+      "path": "/api/notifications/read-all",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/notifications/unread-count",
+      "module": "notifications",
+      "auth": true,
+      "admin": false,
+      "line": 18
+    },
+    {
+      "method": "GET",
+      "path": "/api/posts",
+      "module": "posts",
+      "auth": false,
+      "admin": false,
+      "line": 103
+    },
+    {
+      "method": "POST",
+      "path": "/api/posts",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 93
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/posts/:id",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 178
+    },
+    {
+      "method": "GET",
+      "path": "/api/posts/:id",
+      "module": "posts",
+      "auth": false,
+      "admin": false,
+      "line": 130
+    },
+    {
+      "method": "PUT",
+      "path": "/api/posts/:id",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 138
+    },
+    {
+      "method": "POST",
+      "path": "/api/posts/:id/bookmark",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 148
+    },
+    {
+      "method": "POST",
+      "path": "/api/posts/:id/comments",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 158
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/posts/:id/comments/:commentId",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 205
+    },
+    {
+      "method": "PUT",
+      "path": "/api/posts/:id/comments/:commentId",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 193
+    },
+    {
+      "method": "POST",
+      "path": "/api/posts/:id/like",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 168
+    },
+    {
+      "method": "GET",
+      "path": "/api/posts/bookmarks",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 77
+    },
+    {
+      "method": "POST",
+      "path": "/api/posts/upload-image",
+      "module": "posts",
+      "auth": true,
+      "admin": false,
+      "line": 84
+    },
+    {
+      "method": "GET",
+      "path": "/api/posts/users/search",
+      "module": "posts",
+      "auth": false,
+      "admin": false,
+      "line": 65
+    },
+    {
+      "method": "GET",
+      "path": "/api/prep-todos",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/prep-todos",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 33
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/prep-todos/:id",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 81
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/prep-todos/:id",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 49
+    },
+    {
+      "method": "POST",
+      "path": "/api/prep-todos/:id/toggle",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 70
+    },
+    {
+      "method": "GET",
+      "path": "/api/prep-todos/stats",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 27
+    },
+    {
+      "method": "GET",
+      "path": "/api/prep-todos/today",
+      "module": "prepTodos",
+      "auth": true,
+      "admin": false,
+      "line": 21
+    },
+    {
+      "method": "POST",
+      "path": "/api/private-messages",
+      "module": "privateMessages",
+      "auth": true,
+      "admin": false,
+      "line": 30
+    },
+    {
+      "method": "GET",
+      "path": "/api/private-messages/:userId",
+      "module": "privateMessages",
+      "auth": true,
+      "admin": false,
+      "line": 61
+    },
+    {
+      "method": "GET",
+      "path": "/api/private-messages/conversations",
+      "module": "privateMessages",
+      "auth": true,
+      "admin": false,
+      "line": 50
+    },
+    {
+      "method": "GET",
+      "path": "/api/private-messages/users/search",
+      "module": "privateMessages",
+      "auth": true,
+      "admin": false,
+      "line": 13
+    },
+    {
+      "method": "GET",
+      "path": "/api/profile",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 13
+    },
+    {
+      "method": "PUT",
+      "path": "/api/profile",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/api/profile/:userId",
+      "module": "profile",
+      "auth": false,
+      "admin": false,
+      "line": 136
+    },
+    {
+      "method": "GET",
+      "path": "/api/profile/:userId/view-stats",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 169
+    },
+    {
+      "method": "POST",
+      "path": "/api/profile/avatar",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 31
+    },
+    {
+      "method": "POST",
+      "path": "/api/profile/awards",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 55
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/profile/awards/:awardId",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 65
+    },
+    {
+      "method": "GET",
+      "path": "/api/profile/skills",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 88
+    },
+    {
+      "method": "POST",
+      "path": "/api/profile/skills",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 93
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/profile/skills/:skill",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 103
+    },
+    {
+      "method": "POST",
+      "path": "/api/profile/upload-proof",
+      "module": "profile",
+      "auth": true,
+      "admin": false,
+      "line": 113
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/qa/answers/:id",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 120
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/qa/answers/:id",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 104
+    },
+    {
+      "method": "GET",
+      "path": "/api/qa/questions",
+      "module": "qa",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/qa/questions",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 46
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/qa/questions/:id",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 74
+    },
+    {
+      "method": "GET",
+      "path": "/api/qa/questions/:id",
+      "module": "qa",
+      "auth": false,
+      "admin": false,
+      "line": 36
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/qa/questions/:id",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 62
+    },
+    {
+      "method": "GET",
+      "path": "/api/qa/questions/:id/answers",
+      "module": "qa",
+      "auth": false,
+      "admin": false,
+      "line": 86
+    },
+    {
+      "method": "POST",
+      "path": "/api/qa/questions/:id/answers",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 92
+    },
+    {
+      "method": "POST",
+      "path": "/api/qa/questions/:questionId/accept/:answerId",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 132
+    },
+    {
+      "method": "GET",
+      "path": "/api/qa/questions/search",
+      "module": "qa",
+      "auth": false,
+      "admin": false,
+      "line": 19
+    },
+    {
+      "method": "GET",
+      "path": "/api/qa/tags/popular",
+      "module": "qa",
+      "auth": false,
+      "admin": false,
+      "line": 30
+    },
+    {
+      "method": "POST",
+      "path": "/api/qa/vote",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 144
+    },
+    {
+      "method": "POST",
+      "path": "/api/qa/votes/status",
+      "module": "qa",
+      "auth": true,
+      "admin": false,
+      "line": 159
+    },
+    {
+      "method": "GET",
+      "path": "/api/quiz",
+      "module": "quiz",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/quiz",
+      "module": "quiz",
+      "auth": true,
+      "admin": false,
+      "line": 100
+    },
+    {
+      "method": "GET",
+      "path": "/api/quiz/:id",
+      "module": "quiz",
+      "auth": false,
+      "admin": false,
+      "line": 24
+    },
+    {
+      "method": "GET",
+      "path": "/api/quiz/:id/leaderboard",
+      "module": "quiz",
+      "auth": false,
+      "admin": false,
+      "line": 94
+    },
+    {
+      "method": "GET",
+      "path": "/api/quiz/:id/questions",
+      "module": "quiz",
+      "auth": true,
+      "admin": false,
+      "line": 34
+    },
+    {
+      "method": "POST",
+      "path": "/api/quiz/:id/questions",
+      "module": "quiz",
+      "auth": true,
+      "admin": false,
+      "line": 115
+    },
+    {
+      "method": "POST",
+      "path": "/api/quiz/:id/submit",
+      "module": "quiz",
+      "auth": true,
+      "admin": false,
+      "line": 40
+    },
+    {
+      "method": "GET",
+      "path": "/api/quiz/my/attempts",
+      "module": "quiz",
+      "auth": true,
+      "admin": false,
+      "line": 17
+    },
+    {
+      "method": "GET",
+      "path": "/api/ranking",
+      "module": "ranking",
+      "auth": false,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "POST",
+      "path": "/api/ranking/award",
+      "module": "ranking",
+      "auth": true,
+      "admin": true,
+      "line": 53
+    },
+    {
+      "method": "GET",
+      "path": "/api/ratings/:competitionId",
+      "module": "ratings",
+      "auth": false,
+      "admin": false,
+      "line": 28
+    },
+    {
+      "method": "POST",
+      "path": "/api/ratings/:competitionId",
+      "module": "ratings",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/ratings/:competitionId/my",
+      "module": "ratings",
+      "auth": true,
+      "admin": false,
+      "line": 34
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommend/deadline-soon",
+      "module": "recommend",
+      "auth": false,
+      "admin": false,
+      "line": 31
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommend/personalized",
+      "module": "recommend",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommend/similar/:competitionId",
+      "module": "recommend",
+      "auth": false,
+      "admin": false,
+      "line": 18
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommend/trending",
+      "module": "recommend",
+      "auth": false,
+      "admin": false,
+      "line": 25
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommendations",
+      "module": "recommendations",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/recruitments",
+      "module": "recruitments",
+      "auth": false,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "POST",
+      "path": "/api/recruitments",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/recruitments/:id",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 57
+    },
+    {
+      "method": "GET",
+      "path": "/api/recruitments/:id",
+      "module": "recruitments",
+      "auth": false,
+      "admin": false,
+      "line": 32
+    },
+    {
+      "method": "GET",
+      "path": "/api/recruitments/:id/applications",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 101
+    },
+    {
+      "method": "POST",
+      "path": "/api/recruitments/:id/apply",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 75
+    },
+    {
+      "method": "PUT",
+      "path": "/api/recruitments/:id/close",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 40
+    },
+    {
+      "method": "PUT",
+      "path": "/api/recruitments/applications/:id",
+      "module": "recruitments",
+      "auth": true,
+      "admin": false,
+      "line": 115
+    },
+    {
+      "method": "POST",
+      "path": "/api/registrations",
+      "module": "registrations",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/registrations/:competitionId",
+      "module": "registrations",
+      "auth": true,
+      "admin": false,
+      "line": 26
+    },
+    {
+      "method": "GET",
+      "path": "/api/registrations/check/:competitionId",
+      "module": "registrations",
+      "auth": true,
+      "admin": false,
+      "line": 45
+    },
+    {
+      "method": "GET",
+      "path": "/api/registrations/my",
+      "module": "registrations",
+      "auth": true,
+      "admin": false,
+      "line": 38
+    },
+    {
+      "method": "GET",
+      "path": "/api/report/monthly",
+      "module": "weeklyReport",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/api/report/weekly",
+      "module": "weeklyReport",
+      "auth": true,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "GET",
+      "path": "/api/resources",
+      "module": "resources",
+      "auth": false,
+      "admin": false,
+      "line": 49
+    },
+    {
+      "method": "POST",
+      "path": "/api/resources",
+      "module": "resources",
+      "auth": true,
+      "admin": false,
+      "line": 13
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/resources/:id",
+      "module": "resources",
+      "auth": true,
+      "admin": false,
+      "line": 100
+    },
+    {
+      "method": "GET",
+      "path": "/api/resources/:id/download",
+      "module": "resources",
+      "auth": false,
+      "admin": false,
+      "line": 59
+    },
+    {
+      "method": "POST",
+      "path": "/api/resources/:id/rate",
+      "module": "resources",
+      "auth": true,
+      "admin": false,
+      "line": 72
+    },
+    {
+      "method": "GET",
+      "path": "/api/resources/:id/rating",
+      "module": "resources",
+      "auth": false,
+      "admin": false,
+      "line": 94
+    },
+    {
+      "method": "GET",
+      "path": "/api/search",
+      "module": "search",
+      "auth": false,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/showcases",
+      "module": "showcases",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/showcases",
+      "module": "showcases",
+      "auth": true,
+      "admin": false,
+      "line": 27
+    },
+    {
+      "method": "GET",
+      "path": "/api/showcases/:showcaseId",
+      "module": "showcases",
+      "auth": false,
+      "admin": false,
+      "line": 47
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/showcases/:showcaseId/like",
+      "module": "showcases",
+      "auth": true,
+      "admin": false,
+      "line": 66
+    },
+    {
+      "method": "POST",
+      "path": "/api/showcases/:showcaseId/like",
+      "module": "showcases",
+      "auth": true,
+      "admin": false,
+      "line": 59
+    },
+    {
+      "method": "GET",
+      "path": "/api/showcases/user/my",
+      "module": "showcases",
+      "auth": true,
+      "admin": false,
+      "line": 21
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/award-distribution",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/awards-by-college",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 45
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/awards-by-competition",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 50
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/college-participation",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/competition-popularity",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 15
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/competition/:id",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 21
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/monthly-trend",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 18
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/overview",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 9
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/participants-by-category",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 39
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/ranking-by-category",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 32
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/ranking-by-college",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 29
+    },
+    {
+      "method": "GET",
+      "path": "/api/statistics/registration-trend",
+      "module": "statistics",
+      "auth": false,
+      "admin": false,
+      "line": 36
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-buddy/competition/:competitionId",
+      "module": "studyBuddy",
+      "auth": true,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-buddy/match",
+      "module": "studyBuddy",
+      "auth": true,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/study-checkin/checkins/:checkinId",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 92
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-checkin/plans",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-checkin/plans",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 33
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-checkin/plans/:planId/checkins",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 64
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-checkin/plans/:planId/checkins",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 75
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/study-checkin/plans/:planId/status",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 48
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-checkin/stats",
+      "module": "studyCheckin",
+      "auth": true,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-groups",
+      "module": "studyGroups",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-groups",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 17
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-groups/:groupId",
+      "module": "studyGroups",
+      "auth": false,
+      "admin": false,
+      "line": 34
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-groups/:groupId/join",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 46
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-groups/:groupId/leave",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 53
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-groups/:groupId/members",
+      "module": "studyGroups",
+      "auth": false,
+      "admin": false,
+      "line": 60
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-groups/:groupId/messages",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 78
+    },
+    {
+      "method": "POST",
+      "path": "/api/study-groups/:groupId/messages",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 66
+    },
+    {
+      "method": "GET",
+      "path": "/api/study-groups/user/my",
+      "module": "studyGroups",
+      "auth": true,
+      "admin": false,
+      "line": 28
+    },
+    {
+      "method": "POST",
+      "path": "/api/subscriptions",
+      "module": "subscriptions",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/subscriptions/:competitionId",
+      "module": "subscriptions",
+      "auth": true,
+      "admin": false,
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/api/subscriptions/check/:competitionId",
+      "module": "subscriptions",
+      "auth": true,
+      "admin": false,
+      "line": 35
+    },
+    {
+      "method": "GET",
+      "path": "/api/subscriptions/my",
+      "module": "subscriptions",
+      "auth": true,
+      "admin": false,
+      "line": 29
+    },
+    {
+      "method": "POST",
+      "path": "/api/teacher-cert/apply",
+      "module": "teacherCert",
+      "auth": true,
+      "admin": false,
+      "line": 12
+    },
+    {
+      "method": "GET",
+      "path": "/api/teacher-cert/status",
+      "module": "teacherCert",
+      "auth": true,
+      "admin": false,
+      "line": 37
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/team-files/file/:fileId",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 144
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-files/file/:fileId",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 129
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-files/file/:fileId/download",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 110
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/team-files/file/:fileId/move",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 189
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/team-files/file/:fileId/rename",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 164
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-files/team/:teamId",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 69
+    },
+    {
+      "method": "POST",
+      "path": "/api/team-files/team/:teamId/folder",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 82
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-files/team/:teamId/search",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 210
+    },
+    {
+      "method": "POST",
+      "path": "/api/team-files/team/:teamId/upload",
+      "module": "teamFiles",
+      "auth": true,
+      "admin": false,
+      "line": 98
+    },
+    {
+      "method": "GET",
+      "path": "/api/team-match",
+      "module": "teamMatch",
+      "auth": true,
+      "admin": false,
+      "line": 10
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 62
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/teams/:teamId",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 238
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/:teamId",
+      "module": "teams",
+      "auth": false,
+      "admin": false,
+      "line": 110
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/:teamId/invites",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 284
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/:teamId/invites",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 259
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/teams/:teamId/invites/:inviteId",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 308
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/:teamId/join-requests",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 135
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/:teamId/join-requests",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 125
+    },
+    {
+      "method": "PUT",
+      "path": "/api/teams/:teamId/join-requests/:requestId",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 155
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/teams/:teamId/leave",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 227
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/:teamId/members",
+      "module": "teams",
+      "auth": false,
+      "admin": false,
+      "line": 177
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/teams/:teamId/members/:userId",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 194
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/:teamId/messages",
+      "module": "chat",
+      "auth": true,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "PUT",
+      "path": "/api/teams/:teamId/transfer-leader",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 215
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/all",
+      "module": "teams",
+      "auth": false,
+      "admin": false,
+      "line": 73
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/competition/:competitionId",
+      "module": "teams",
+      "auth": false,
+      "admin": false,
+      "line": 100
+    },
+    {
+      "method": "POST",
+      "path": "/api/teams/join-by-code",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 330
+    },
+    {
+      "method": "GET",
+      "path": "/api/teams/my",
+      "module": "teams",
+      "auth": true,
+      "admin": false,
+      "line": 90
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/my",
+      "module": "timeline",
+      "auth": true,
+      "admin": false,
+      "line": 17
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/my/growth",
+      "module": "timeline",
+      "auth": true,
+      "admin": false,
+      "line": 41
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/my/milestones",
+      "module": "timeline",
+      "auth": true,
+      "admin": false,
+      "line": 53
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/my/stats",
+      "module": "timeline",
+      "auth": true,
+      "admin": false,
+      "line": 29
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/user/:userId",
+      "module": "timeline",
+      "auth": false,
+      "admin": false,
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/user/:userId/growth",
+      "module": "timeline",
+      "auth": false,
+      "admin": false,
+      "line": 35
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/user/:userId/milestones",
+      "module": "timeline",
+      "auth": false,
+      "admin": false,
+      "line": 47
+    },
+    {
+      "method": "GET",
+      "path": "/api/timeline/user/:userId/stats",
+      "module": "timeline",
+      "auth": false,
+      "admin": false,
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/online-status",
+      "module": "onlineStatus",
+      "auth": false,
+      "admin": false,
+      "line": 14
+    }
+  ]
+}
