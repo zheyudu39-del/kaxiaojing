@@ -8,9 +8,18 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
 import { useAuthStore } from './stores/auth'
 import { useThemeStore } from './stores/theme'
-import { setUnauthorizedHandler } from './utils/request'
+import { setUnauthorizedHandler, setMessageInstance } from './utils/request'
 
 dayjs.locale('zh-cn')
+
+/** 把 antd 的 message 实例注入请求层，避免使用静态方法导致主题上下文丢失 */
+function MessageBridge() {
+  const { message } = AntApp.useApp()
+  useEffect(() => {
+    setMessageInstance(message)
+  }, [message])
+  return null
+}
 
 export default function App() {
   const mode = useThemeStore((s) => s.mode)
@@ -57,6 +66,7 @@ export default function App() {
       }}
     >
       <AntApp>
+        <MessageBridge />
         <RouterProvider router={router} />
       </AntApp>
     </ConfigProvider>

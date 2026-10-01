@@ -18,10 +18,13 @@ export const competitionApi = {
 
   related: (id: number | string) => request.get<Competition[]>(`/competitions/${id}/related`),
 
-  categories: () => request.get<string[]>('/competitions/categories'),
+  categories: () =>
+    request.get<{ categories: string[] }>('/competitions/categories').then((r) => r?.categories ?? []),
 
   deadlineSoon: (params?: { days?: number }) =>
-    request.get<Competition[]>('/competitions/deadline-soon', { params }),
+    request
+      .get<{ competitions: Competition[] }>('/competitions/deadline-soon', { params })
+      .then((r) => r?.competitions ?? []),
 
   create: (body: Partial<Competition>) => request.post<{ id: number }>('/competitions', body),
 
@@ -61,20 +64,43 @@ export const competitionApi = {
 }
 
 export const collegeApi = {
-  list: () => request.get<College[]>('/colleges'),
-  majors: (collegeId: number) => request.get<Major[]>(`/colleges/${collegeId}/majors`),
+  /** 后端返回 { colleges: [...] } */
+  list: () =>
+    request.get<{ colleges: College[] }>('/colleges').then((r) => r?.colleges ?? []),
+  majors: (collegeId: number) =>
+    request
+      .get<{ majors: Major[] }>(`/colleges/${collegeId}/majors`)
+      .then((r) => r?.majors ?? []),
   competitions: (collegeId: number, params?: any) =>
-    request.get<Competition[]>(`/colleges/${collegeId}/competitions`, { params }),
+    request
+      .get<{ competitions: Competition[] }>(`/colleges/${collegeId}/competitions`, { params })
+      .then((r) => r?.competitions ?? []),
 }
 
 export const majorApi = {
   competitions: (majorId: number, params?: any) =>
-    request.get<Competition[]>(`/majors/${majorId}/competitions`, { params }),
+    request
+      .get<{ competitions: Competition[] }>(`/majors/${majorId}/competitions`, { params })
+      .then((r) => r?.competitions ?? []),
 }
 
 export const rankingApi = {
+  /** 后端返回 { rankings: [...] }，字段为 id/username/participation_count/award_count/gold_count... */
   list: (params?: { type?: string; category?: string; limit?: number }) =>
-    request.get<RankingItem[]>('/ranking', { params }),
+    request.get<{ rankings: any[] }>('/ranking', { params }).then((r) =>
+      (r?.rankings ?? []).map((x: any, i: number) => ({
+        rank: i + 1,
+        user_id: x.id ?? x.user_id,
+        username: x.username,
+        avatar_url: x.avatar_url,
+        score: x.participation_count ?? 0,
+        award_count: x.award_count ?? 0,
+        competition_count: x.participation_count ?? 0,
+        gold_count: x.gold_count ?? 0,
+        silver_count: x.silver_count ?? 0,
+        bronze_count: x.bronze_count ?? 0,
+      })),
+    ),
   award: (body: any) => request.post('/ranking/award', body),
 }
 

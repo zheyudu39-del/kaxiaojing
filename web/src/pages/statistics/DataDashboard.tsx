@@ -26,26 +26,29 @@ export default function DataDashboard() {
     pick(dataDashboardApi.awardDistribution(), setAwards)
   }, [])
 
-  const bar = (data: any[], nameKey = 'name', valueKey = 'count') => ({
+  const nameOf = (d: any) => d.category ?? d.name ?? d.college ?? d.label ?? d.month ?? d.date ?? '-'
+  const valueOf = (d: any) => d.count ?? d.value ?? d.total ?? d.number ?? 0
+
+  const bar = (data: any[]) => ({
     grid: { left: 8, right: 16, top: 24, bottom: 8, containLabel: true },
-    xAxis: { type: 'category' as const, data: data.map((d) => d[nameKey]), axisLabel: { interval: 0, rotate: 30, fontSize: 11 } },
+    xAxis: { type: 'category' as const, data: data.map(nameOf), axisLabel: { interval: 0, rotate: 30, fontSize: 11 } },
     yAxis: { type: 'value' as const },
     tooltip: { trigger: 'axis' as const },
-    series: [{ type: 'bar' as const, data: data.map((d) => d[valueKey]), itemStyle: { color: '#1890ff' } }],
+    series: [{ type: 'bar' as const, data: data.map(valueOf), itemStyle: { color: '#1890ff' } }],
   })
 
-  const pie = (data: any[], nameKey = 'name', valueKey = 'count') => ({
+  const pie = (data: any[]) => ({
     tooltip: { trigger: 'item' as const },
     legend: { bottom: 0, type: 'scroll' as const },
-    series: [{ type: 'pie' as const, radius: ['40%', '65%'], data: data.map((d) => ({ name: d[nameKey], value: d[valueKey] })) }],
+    series: [{ type: 'pie' as const, radius: ['40%', '65%'], data: data.map((d) => ({ name: nameOf(d), value: valueOf(d) })) }],
   })
 
-  const line = (data: any[], xKey = 'month', yKey = 'count') => ({
+  const line = (data: any[]) => ({
     grid: { left: 8, right: 16, top: 24, bottom: 8, containLabel: true },
-    xAxis: { type: 'category' as const, data: data.map((d) => d[xKey]) },
+    xAxis: { type: 'category' as const, data: data.map(nameOf) },
     yAxis: { type: 'value' as const },
     tooltip: { trigger: 'axis' as const },
-    series: [{ type: 'line' as const, smooth: true, data: data.map((d) => d[yKey]), areaStyle: {} }],
+    series: [{ type: 'line' as const, smooth: true, data: data.map(valueOf), areaStyle: {} }],
   })
 
   return (

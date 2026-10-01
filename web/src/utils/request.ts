@@ -1,5 +1,22 @@
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
-import { message } from 'antd'
+import type { MessageInstance } from 'antd/es/message/interface'
+
+/**
+ * antd 的 message 实例由 App 注入（见 App.tsx）。
+ * 这样错误提示才能消费 ConfigProvider 的主题/语言上下文，
+ * 也避免出现 "Static function can not consume context" 警告。
+ */
+let notify = {
+  success: () => {},
+  error: () => {},
+  info: () => {},
+  warning: () => {},
+  loading: () => {},
+} as unknown as MessageInstance
+
+export function setMessageInstance(instance: MessageInstance) {
+  notify = instance
+}
 
 const TOKEN_KEY = 'token'
 
@@ -47,22 +64,22 @@ http.interceptors.response.use(
       clearToken()
       // 只在非登录页提示，避免刷屏
       if (!location.pathname.startsWith('/login')) {
-        message.warning('登录已过期，请重新登录')
+        notify.warning('登录已过期，请重新登录')
       }
       onUnauthorized?.()
       return Promise.reject(error)
     }
 
     if (status === 403) {
-      message.error(msg || '没有权限执行此操作')
+      notify.error(msg || '没有权限执行此操作')
     } else if (status === 429) {
-      message.error('操作过于频繁，请稍后再试')
+      notify.error('操作过于频繁，请稍后再试')
     } else if (status && status >= 500) {
-      message.error(msg || '服务器开小差了，请稍后再试')
+      notify.error(msg || '服务器开小差了，请稍后再试')
     } else if (msg) {
-      message.error(msg)
+      notify.error(msg)
     } else if (error.code === 'ECONNABORTED') {
-      message.error('请求超时，请检查网络')
+      notify.error('请求超时，请检查网络')
     }
 
     return Promise.reject(error)

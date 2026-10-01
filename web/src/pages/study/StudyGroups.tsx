@@ -119,7 +119,7 @@ export default function StudyGroups() {
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="name" label="小组名称" rules={[{ required: true, message: '请输入名称' }]}>

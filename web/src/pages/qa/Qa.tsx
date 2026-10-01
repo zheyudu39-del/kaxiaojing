@@ -211,7 +211,7 @@ export default function Qa() {
         onOk={() => form.submit()}
         confirmLoading={submitting}
         width={640}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="title" label="问题标题" rules={[{ required: true, message: '请输入标题' }]}>

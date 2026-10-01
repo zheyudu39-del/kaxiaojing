@@ -401,7 +401,7 @@ export default function TeamDetail() {
         onCancel={() => setInviteOpen(false)}
         onOk={createInvite}
         okText="生成"
-        destroyOnClose
+        destroyOnHidden
       >
         <Paragraph>生成一个 24 小时内有效的邀请码，把它发给队友即可让他们直接加入队伍。</Paragraph>
         <Text type="secondary" style={{ fontSize: 12 }}>

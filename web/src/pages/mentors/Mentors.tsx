@@ -251,7 +251,7 @@ export default function Mentors() {
         onCancel={() => setApplyOpen(false)}
         onOk={() => applyForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={applyForm} layout="vertical" onFinish={applyMentor}>
           <Form.Item name="introduction" label="个人简介" rules={[{ required: true, message: '请输入简介' }]}>
@@ -275,7 +275,7 @@ export default function Mentors() {
         onCancel={() => setRequestTarget(null)}
         onOk={() => reqForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={reqForm} layout="vertical" onFinish={requestMentor}>
           <Form.Item name="message" label="申请说明">

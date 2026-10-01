@@ -252,7 +252,7 @@ export default function Resources() {
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="title" label="资料标题" rules={[{ required: true, message: '请输入标题' }]}>

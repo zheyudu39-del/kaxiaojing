@@ -328,7 +328,7 @@ export default function Profile() {
         onCancel={() => setAwardOpen(false)}
         onOk={() => awardForm.submit()}
         confirmLoading={saving}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={awardForm} layout="vertical" onFinish={submitAward}>
           <Form.Item name="competition_id" label="竞赛" rules={[{ required: true, message: '请填写竞赛 ID' }]}>

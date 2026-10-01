@@ -186,7 +186,7 @@ export default function Notebook() {
         onOk={() => form.submit()}
         confirmLoading={submitting}
         width={640}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={submit}>
           <Form.Item name="title" label="标题" rules={[{ required: true, message: '请输入标题' }]}>

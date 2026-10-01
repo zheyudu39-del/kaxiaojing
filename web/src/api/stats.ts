@@ -1,62 +1,111 @@
 import { request } from '@/utils/request'
 
 export const dashboardApi = {
-  overview: () => request.get<{
-    user_count: number
-    competition_count: number
-    team_count: number
-    post_count: number
-    hot_competitions?: any[]
-    recent_notices?: any[]
-  }>('/dashboard'),
+  /** 后端字段是 total_users / total_competitions / total_teams，这里统一成页面用的名字 */
+  overview: () =>
+    request.get<any>('/dashboard').then((r) => ({
+      user_count: r?.total_users ?? 0,
+      competition_count: r?.total_competitions ?? 0,
+      team_count: r?.total_teams ?? 0,
+      post_count: r?.total_posts ?? 0,
+      hot_competitions: r?.upcoming_competitions ?? [],
+      raw: r,
+    })),
 }
 
 export const statisticsApi = {
-  overview: () => request.get<any>('/statistics/overview'),
-  collegeParticipation: () => request.get<any[]>('/statistics/college-participation'),
+  /** 后端字段是 total_* */
+  overview: () =>
+    request.get<any>('/statistics/overview').then((r) => ({
+      competition_count: r?.total_competitions ?? 0,
+      user_count: r?.total_users ?? 0,
+      team_count: r?.total_teams ?? 0,
+      award_count: r?.total_awards ?? 0,
+      resource_count: r?.total_resources ?? 0,
+      raw: r,
+    })),
+  collegeParticipation: () =>
+    request.get<any>('/statistics/college-participation').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
   competitionPopularity: (params?: { limit?: number }) =>
-    request.get<any[]>('/statistics/competition-popularity', { params }),
-  monthlyTrend: () => request.get<any[]>('/statistics/monthly-trend'),
+    request
+      .get<any>('/statistics/competition-popularity', { params })
+      .then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  monthlyTrend: () =>
+    request.get<any>('/statistics/monthly-trend').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
   competitionDetail: (id: number | string) => request.get<any>(`/statistics/competition/${id}`),
-  rankingByCollege: () => request.get<any[]>('/statistics/ranking-by-college'),
-  rankingByCategory: () => request.get<any[]>('/statistics/ranking-by-category'),
-  registrationTrend: () => request.get<any[]>('/statistics/registration-trend'),
-  participantsByCategory: () => request.get<any[]>('/statistics/participants-by-category'),
-  awardDistribution: () => request.get<any[]>('/statistics/award-distribution'),
-  awardsByCollege: () => request.get<any[]>('/statistics/awards-by-college'),
-  awardsByCompetition: () => request.get<any[]>('/statistics/awards-by-competition'),
+  rankingByCollege: () =>
+    request.get<any>('/statistics/ranking-by-college').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  rankingByCategory: () =>
+    request.get<any>('/statistics/ranking-by-category').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  registrationTrend: () =>
+    request.get<any>('/statistics/registration-trend').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  participantsByCategory: () =>
+    request.get<any>('/statistics/participants-by-category').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  awardDistribution: () =>
+    request.get<any>('/statistics/award-distribution').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  awardsByCollege: () =>
+    request.get<any>('/statistics/awards-by-college').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  awardsByCompetition: () =>
+    request.get<any>('/statistics/awards-by-competition').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
 }
 
 export const dataDashboardApi = {
-  overview: () => request.get<any>('/data-dashboard/overview'),
-  competitionsByCategory: () => request.get<any[]>('/data-dashboard/competitions-by-category'),
-  participantsByCategory: () => request.get<any[]>('/data-dashboard/participants-by-category'),
-  participantsByCollege: () => request.get<any[]>('/data-dashboard/participants-by-college'),
-  awardDistribution: () => request.get<any[]>('/data-dashboard/award-distribution'),
-  registrationTrend: () => request.get<any[]>('/data-dashboard/registration-trend'),
-  userGrowth: () => request.get<any[]>('/data-dashboard/user-growth'),
-  hotCompetitions: () => request.get<any[]>('/data-dashboard/hot-competitions'),
-  activeUsers: () => request.get<any[]>('/data-dashboard/active-users'),
+  /** 后端字段是 camelCase：totalUsers / totalCompetitions ... */
+  overview: () =>
+    request.get<any>('/data-dashboard/overview').then((r) => ({
+      competition_count: r?.totalCompetitions ?? 0,
+      user_count: r?.totalUsers ?? 0,
+      team_count: r?.totalTeams ?? 0,
+      resource_count: r?.totalPosts ?? 0,
+      raw: r,
+    })),
+  competitionsByCategory: () =>
+    request
+      .get<any>('/data-dashboard/competitions-by-category')
+      .then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  participantsByCategory: () =>
+    request
+      .get<any>('/data-dashboard/participants-by-category')
+      .then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  participantsByCollege: () =>
+    request
+      .get<any>('/data-dashboard/participants-by-college')
+      .then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  awardDistribution: () =>
+    request.get<any>('/data-dashboard/award-distribution').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  registrationTrend: () =>
+    request.get<any>('/data-dashboard/registration-trend').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  userGrowth: () =>
+    request.get<any>('/data-dashboard/user-growth').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  hotCompetitions: () =>
+    request.get<any>('/data-dashboard/hot-competitions').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
+  activeUsers: () =>
+    request.get<any>('/data-dashboard/active-users').then((r: any) => (Array.isArray(r) ? r : (r?.data ?? []))),
 }
 
 export const searchApi = {
-  all: (keyword: string, params?: { type?: string; limit?: number }) =>
-    request.get<{
-      competitions?: any[]
-      posts?: any[]
-      resources?: any[]
-      users?: any[]
-      teams?: any[]
-    }>('/search', { params: { keyword, ...params } }),
+  /** 后端返回扁平的 { results: [{type,id,title,description,relevance}] } */
+  all: (keyword: string, params?: { types?: string; limit?: number }) =>
+    request.get<{ results: any[] }>('/search', { params: { keyword, ...params } }),
 }
 
 export const recommendApi = {
-  personalized: () => request.get<any[]>('/recommend/personalized'),
-  trending: (params?: { limit?: number }) => request.get<any[]>('/recommend/trending', { params }),
-  deadlineSoon: (params?: { days?: number }) => request.get<any[]>('/recommend/deadline-soon', { params }),
+  personalized: () =>
+    request.get<{ competitions: any[] }>('/recommend/personalized').then((r) => r?.competitions ?? []),
+  trending: (params?: { limit?: number }) =>
+    request
+      .get<{ competitions: any[] }>('/recommend/trending', { params })
+      .then((r) => r?.competitions ?? []),
+  deadlineSoon: (params?: { days?: number }) =>
+    request
+      .get<{ competitions: any[] }>('/recommend/deadline-soon', { params })
+      .then((r) => r?.competitions ?? []),
   similar: (competitionId: number | string) =>
-    request.get<any[]>(`/recommend/similar/${competitionId}`),
-  list: () => request.get<any[]>('/recommendations'),
+    request
+      .get<{ competitions: any[] }>(`/recommend/similar/${competitionId}`)
+      .then((r) => r?.competitions ?? []),
+  list: () =>
+    request.get<{ competitions: any[] }>('/recommendations').then((r) => r?.competitions ?? []),
 }
 
 export const onlineStatusApi = {

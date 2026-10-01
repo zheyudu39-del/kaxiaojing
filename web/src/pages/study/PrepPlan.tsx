@@ -182,7 +182,7 @@ export default function PrepPlan() {
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="title" label="待办内容" rules={[{ required: true, message: '请输入内容' }]}>

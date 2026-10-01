@@ -213,7 +213,7 @@ export default function Kanban() {
         open={open}
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={submit}>
           <Form.Item name="title" label="任务标题" rules={[{ required: true, message: '请输入任务标题' }]}>

@@ -142,7 +142,7 @@ export default function StudyCheckin() {
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="title" label="计划名称" rules={[{ required: true, message: '请输入名称' }]}>
@@ -169,7 +169,7 @@ export default function StudyCheckin() {
         onCancel={() => setCheckinTarget(null)}
         onOk={() => checkinForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={checkinForm} layout="vertical" onFinish={doCheckin}>
           <Form.Item name="content" label="今日收获">

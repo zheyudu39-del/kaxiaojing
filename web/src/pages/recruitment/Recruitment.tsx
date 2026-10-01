@@ -254,7 +254,7 @@ export default function Recruitment() {
         onCancel={() => setOpen(false)}
         onOk={() => form.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" onFinish={create}>
           <Form.Item name="title" label="招募标题" rules={[{ required: true, message: '请输入标题' }]}>
@@ -287,7 +287,7 @@ export default function Recruitment() {
         onCancel={() => setApplyTarget(null)}
         onOk={() => applyForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={applyForm} layout="vertical" onFinish={apply}>
           <Form.Item name="message" label="申请留言">

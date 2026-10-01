@@ -165,7 +165,7 @@ export default function MyTeams() {
         onCancel={() => setCreateOpen(false)}
         onOk={() => createForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={createForm} layout="vertical" onFinish={createTeam}>
           <Form.Item
@@ -198,7 +198,7 @@ export default function MyTeams() {
         onCancel={() => setJoinOpen(false)}
         onOk={() => joinForm.submit()}
         confirmLoading={submitting}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={joinForm} layout="vertical" onFinish={joinByCode}>
           <Form.Item name="invite_code" label="邀请码" rules={[{ required: true, message: '请输入邀请码' }]}>

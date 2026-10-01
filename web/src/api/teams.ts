@@ -68,7 +68,11 @@ export const teamApi = {
 }
 
 export const teamMatchApi = {
-  match: (params?: { competition_id?: number }) => request.get<any[]>('/team-match', { params }),
+  /** 后端返回 { matches: [...] } */
+  match: (params?: { competition_id?: number }) =>
+    request
+      .get<{ matches: any[] }>('/team-match', { params })
+      .then((r) => r?.matches ?? []),
 }
 
 export const kanbanApi = {
