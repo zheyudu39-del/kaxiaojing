@@ -32,9 +32,10 @@ export const recruitmentApi = {
 
 export const certificateApi = {
   list: (params?: { category?: string; keyword?: string }) =>
-    request.get<Certificate[]>('/certificates', { params }),
+    request.get<{ certificates: Certificate[] }>('/certificates', { params }),
   detail: (id: number | string) => request.get<Certificate>(`/certificates/${id}`),
-  categories: () => request.get<string[]>('/certificates/categories'),
+  categories: () =>
+    request.get<{ categories: string[] }>('/certificates/categories').then((r) => r?.categories ?? []),
 }
 
 export const certPlanApi = {

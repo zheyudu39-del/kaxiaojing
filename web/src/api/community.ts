@@ -75,11 +75,12 @@ export const qaApi = {
     request.get<{ questions: QAQuestion[]; total: number }>('/qa/questions', { params }),
   question: (id: number | string) => request.get<QAQuestion>(`/qa/questions/${id}`),
   createQuestion: (body: { title: string; content: string; tags?: string; competition_id?: number }) =>
-    request.post<{ id: number }>('/qa/questions', body),
+    request.post<{ success: boolean; question_id: number }>('/qa/questions', body),
   updateQuestion: (id: number | string, body: Partial<QAQuestion>) =>
     request.patch(`/qa/questions/${id}`, body),
   removeQuestion: (id: number | string) => request.delete(`/qa/questions/${id}`),
-  answers: (id: number | string) => request.get<QAAnswer[]>(`/qa/questions/${id}/answers`),
+  answers: (id: number | string) =>
+    request.get<{ answers: QAAnswer[] }>(`/qa/questions/${id}/answers`).then((r) => r?.answers ?? []),
   createAnswer: (id: number | string, content: string) =>
     request.post(`/qa/questions/${id}/answers`, { content }),
   updateAnswer: (id: number, content: string) => request.patch(`/qa/answers/${id}`, { content }),
@@ -90,35 +91,39 @@ export const qaApi = {
     request.post('/qa/vote', body),
   votesStatus: (body: { target_type: string; target_ids: number[] }) =>
     request.post('/qa/votes/status', body),
-  popularTags: () => request.get<{ tag: string; count: number }[]>('/qa/tags/popular'),
+  popularTags: () =>
+    request.get<{ tags: { tag: string; count: number }[] }>('/qa/tags/popular').then((r) => r?.tags ?? []),
 }
 
 export const showcaseApi = {
   list: (params?: { page?: number; pageSize?: number; competition_id?: number; year?: number; keyword?: string }) =>
-    request.get<{ showcases: Showcase[]; total: number }>('/showcases', { params }),
-  detail: (id: number | string) => request.get<Showcase>(`/showcases/${id}`),
-  create: (body: Partial<Showcase>) => request.post<{ id: number }>('/showcases', body),
-  my: () => request.get<Showcase[]>('/showcases/user/my'),
+    request.get<{ showcases: Showcase[] }>('/showcases', { params }),
+  detail: (id: number | string) => request.get<Showcase & { is_liked?: boolean }>(`/showcases/${id}`),
+  create: (body: Partial<Showcase>) =>
+    request.post<{ success: boolean; showcase_id: number }>('/showcases', body),
+  my: () => request.get<{ showcases: Showcase[] }>('/showcases/user/my').then((r) => r?.showcases ?? []),
   like: (id: number | string) => request.post(`/showcases/${id}/like`),
   unlike: (id: number | string) => request.delete(`/showcases/${id}/like`),
 }
 
 export const mentorApi = {
   list: (params?: { page?: number; pageSize?: number; competition_id?: number; keyword?: string }) =>
-    request.get<{ mentors: Mentor[]; total: number }>('/mentors', { params }),
-  detail: (id: number | string) => request.get<Mentor>(`/mentors/${id}`),
+    request.get<{ mentors: Mentor[] }>('/mentors', { params }),
+  detail: (id: number | string) =>
+    request.get<{ mentor: Mentor; reviews: any[] }>(`/mentors/${id}`),
   apply: (body: { introduction: string; achievements: string; skills?: string; competition_ids?: number[] }) =>
-    request.post('/mentors/apply', body),
+    request.post<{ success: boolean; mentor_id: number }>('/mentors/apply', body),
   requestMentor: (id: number | string, body: { message?: string; competition_id?: number }) =>
     request.post(`/mentors/${id}/request`, body),
   review: (id: number | string, body: { rating: number; content?: string }) =>
     request.post(`/mentors/${id}/review`, body),
 
-  myInfo: () => request.get<Mentor | null>('/mentors/my/info'),
-  myApplications: () => request.get<any[]>('/mentors/my/applications'),
-  myMentees: () => request.get<any[]>('/mentors/my/mentees'),
-  myMentors: () => request.get<any[]>('/mentors/my/mentors'),
-  myRequests: () => request.get<any[]>('/mentors/my/requests'),
+  myInfo: () => request.get<{ mentor: Mentor | null }>('/mentors/my/info').then((r) => r?.mentor ?? null),
+  myApplications: () =>
+    request.get<{ applications: any[] }>('/mentors/my/applications').then((r) => r?.applications ?? []),
+  myMentees: () => request.get<{ mentees: any[] }>('/mentors/my/mentees').then((r) => r?.mentees ?? []),
+  myMentors: () => request.get<{ mentors: any[] }>('/mentors/my/mentors').then((r) => r?.mentors ?? []),
+  myRequests: () => request.get<{ requests: any[] }>('/mentors/my/requests').then((r) => r?.requests ?? []),
   updateStatus: (body: { is_active: boolean }) => request.patch('/mentors/my/status', body),
   handleRequest: (id: number, action: 'approve' | 'reject') =>
     request.patch(`/mentors/request/${id}`, { action }),
