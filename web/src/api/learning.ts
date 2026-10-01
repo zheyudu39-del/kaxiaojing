@@ -75,71 +75,95 @@ export const teacherCertApi = {
 
 export const studyGroupApi = {
   list: (params?: { page?: number; pageSize?: number; category?: string; keyword?: string }) =>
-    request.get<{ groups: StudyGroup[]; total: number }>('/study-groups', { params }),
-  detail: (id: number | string) => request.get<StudyGroup>(`/study-groups/${id}`),
+    request.get<{ groups: StudyGroup[] }>('/study-groups', { params }),
+  detail: (id: number | string) =>
+    request.get<StudyGroup & { is_member?: boolean }>(`/study-groups/${id}`),
   create: (body: { name: string; category: string; description?: string }) =>
-    request.post<{ id: number }>('/study-groups', body),
-  join: (id: number | string) => request.post(`/study-groups/${id}/join`),
-  leave: (id: number | string) => request.post(`/study-groups/${id}/leave`),
-  members: (id: number | string) => request.get<any[]>(`/study-groups/${id}/members`),
+    request.post<{ success: boolean; group_id: number }>('/study-groups', body),
+  join: (id: number | string) => request.post<{ success: boolean; message: string }>(`/study-groups/${id}/join`),
+  leave: (id: number | string) => request.post<{ success: boolean; message: string }>(`/study-groups/${id}/leave`),
+  members: (id: number | string) =>
+    request.get<{ members: any[] }>(`/study-groups/${id}/members`).then((r) => r?.members ?? []),
   messages: (id: number | string, params?: any) =>
-    request.get<any[]>(`/study-groups/${id}/messages`, { params }),
+    request
+      .get<{ messages: any[] }>(`/study-groups/${id}/messages`, { params })
+      .then((r) => r?.messages ?? []),
   send: (id: number | string, content: string) =>
     request.post(`/study-groups/${id}/messages`, { content }),
-  my: () => request.get<StudyGroup[]>('/study-groups/user/my'),
+  my: () =>
+    request.get<{ groups: StudyGroup[] }>('/study-groups/user/my').then((r) => r?.groups ?? []),
 }
 
 export const studyCheckinApi = {
-  plans: () => request.get<StudyPlan[]>('/study-checkin/plans'),
-  createPlan: (body: Partial<StudyPlan>) => request.post<{ id: number }>('/study-checkin/plans', body),
+  plans: () =>
+    request.get<{ plans: StudyPlan[] }>('/study-checkin/plans').then((r) => r?.plans ?? []),
+  createPlan: (body: Partial<StudyPlan>) =>
+    request.post<{ success: boolean }>('/study-checkin/plans', body),
   updateStatus: (planId: number, status: string) =>
     request.patch(`/study-checkin/plans/${planId}/status`, { status }),
-  checkins: (planId: number) => request.get<StudyCheckin[]>(`/study-checkin/plans/${planId}/checkins`),
+  checkins: (planId: number) =>
+    request
+      .get<{ checkins: StudyCheckin[] }>(`/study-checkin/plans/${planId}/checkins`)
+      .then((r) => r?.checkins ?? []),
   checkin: (planId: number, body: { content?: string; duration?: number }) =>
-    request.post(`/study-checkin/plans/${planId}/checkins`, body),
+    request.post<{ success: boolean }>(`/study-checkin/plans/${planId}/checkins`, body),
   removeCheckin: (checkinId: number) => request.delete(`/study-checkin/checkins/${checkinId}`),
   stats: () => request.get<any>('/study-checkin/stats'),
 }
 
 export const studyBuddyApi = {
-  match: (params?: { competition_id?: number }) => request.get<any[]>('/study-buddy/match', { params }),
+  match: (params?: { competition_id?: number }) =>
+    request
+      .get<{ buddies: any[] }>('/study-buddy/match', { params })
+      .then((r) => r?.buddies ?? []),
   byCompetition: (competitionId: number | string) =>
-    request.get<any[]>(`/study-buddy/competition/${competitionId}`),
+    request
+      .get<{ buddies: any[] }>(`/study-buddy/competition/${competitionId}`)
+      .then((r) => r?.buddies ?? []),
 }
 
 export const notebookApi = {
-  list: (params?: { page?: number; pageSize?: number; keyword?: string }) =>
-    request.get<{ notes: any[]; total: number }>('/notebook', { params }),
+  /** 后端直接返回数组 */
+  list: (params?: { competition_id?: number }) =>
+    request.get<any>('/notebook', { params }).then((r: any) => (Array.isArray(r) ? r : (r?.notes ?? []))),
   detail: (id: number | string) => request.get<any>(`/notebook/${id}`),
-  create: (body: { title: string; content: string; tags?: string }) =>
-    request.post<{ id: number }>('/notebook', body),
+  create: (body: { title: string; content: string; competition_id?: number; tags?: string }) =>
+    request.post<{ success: boolean; note_id?: number }>('/notebook', body),
   update: (id: number | string, body: any) => request.put(`/notebook/${id}`, body),
   remove: (id: number | string) => request.delete(`/notebook/${id}`),
   pin: (id: number | string) => request.post(`/notebook/${id}/pin`),
-  search: (keyword: string) => request.get<any[]>('/notebook/search', { params: { keyword } }),
+  search: (keyword: string) =>
+    request.get<any>('/notebook/search', { params: { keyword } }).then((r: any) => (Array.isArray(r) ? r : (r?.notes ?? []))),
   stats: () => request.get<any>('/notebook/stats'),
 }
 
 export const prepTodoApi = {
-  list: (params?: { competition_id?: number; is_completed?: number }) =>
-    request.get<PrepTodo[]>('/prep-todos', { params }),
-  today: () => request.get<PrepTodo[]>('/prep-todos/today'),
+  /** 后端直接返回数组 */
+  list: (params?: { competition_id?: number; completed?: boolean }) =>
+    request.get<any>('/prep-todos', { params }).then((r: any) => (Array.isArray(r) ? r : (r?.todos ?? []))),
+  today: () =>
+    request.get<any>('/prep-todos/today').then((r: any) => (Array.isArray(r) ? r : (r?.todos ?? []))),
   stats: () => request.get<{ total: number; completed: number; overdue: number }>('/prep-todos/stats'),
-  create: (body: Partial<PrepTodo>) => request.post<{ id: number }>('/prep-todos', body),
+  create: (body: Partial<PrepTodo>) => request.post<{ success: boolean }>('/prep-todos', body),
   update: (id: number, body: Partial<PrepTodo>) => request.patch(`/prep-todos/${id}`, body),
   toggle: (id: number) => request.post(`/prep-todos/${id}/toggle`),
   remove: (id: number) => request.delete(`/prep-todos/${id}`),
 }
 
 export const quizApi = {
-  list: (params?: { competition_id?: number }) => request.get<any[]>('/quiz', { params }),
+  list: (params?: { competition_id?: number }) =>
+    request.get<{ quizzes: any[] }>('/quiz', { params }).then((r) => r?.quizzes ?? []),
   detail: (id: number | string) => request.get<any>(`/quiz/${id}`),
-  questions: (id: number | string) => request.get<any[]>(`/quiz/${id}/questions`),
+  questions: (id: number | string) =>
+    request.get<{ questions: any[] }>(`/quiz/${id}/questions`).then((r) => r?.questions ?? []),
   submit: (id: number | string, answers: Record<string, any>) =>
     request.post<{ score: number; total_points: number }>(`/quiz/${id}/submit`, { answers }),
-  leaderboard: (id: number | string) => request.get<any[]>(`/quiz/${id}/leaderboard`),
-  myAttempts: () => request.get<any[]>('/quiz/my/attempts'),
-  create: (body: any) => request.post<{ id: number }>('/quiz', body),
+  leaderboard: (id: number | string) =>
+    request.get<{ leaderboard: any[] }>(`/quiz/${id}/leaderboard`).then((r) => r?.leaderboard ?? []),
+  myAttempts: () =>
+    request.get<{ attempts: any[] }>('/quiz/my/attempts').then((r) => r?.attempts ?? []),
+  create: (body: any) =>
+    request.post<{ success: boolean; quiz_id: number }>('/quiz', body),
   addQuestion: (id: number | string, body: any) => request.post(`/quiz/${id}/questions`, body),
 }
 
