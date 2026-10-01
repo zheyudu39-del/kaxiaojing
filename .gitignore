@@ -5,6 +5,8 @@ node_modules/
 .env
 .env.local
 .env.*.local
+# 但模板文件要保留
+!.env.example
 
 # ===== 编译产物（由 npm run build 生成）=====
 dist/
