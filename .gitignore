@@ -1,0 +1,28 @@
+# ===== 依赖 =====
+node_modules/
+
+# ===== 环境变量：含密钥，绝不能提交 =====
+.env
+.env.local
+.env.*.local
+
+# ===== 编译产物（由 npm run build 生成）=====
+dist/
+dist-rebuild/
+
+# ===== 运行时数据：属数据不属代码 =====
+data/
+data.bak.*/
+*.db
+*.db-journal
+*.sqlite
+
+# ===== 日志 =====
+*.log
+logs/
+
+# ===== 编辑器 / 系统 =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

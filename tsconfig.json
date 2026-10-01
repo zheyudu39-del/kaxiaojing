@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    /* 目标与模块：与 dist 编译产物特征一致（保留 const/let、可选链、私有字段） */
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+
+    /* 输出：与服务器上的 dist 布局一致 */
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    /* 模块互操作：产物中使用了 __importDefault / __importStar，说明开启 */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* 类字段：产物中字段赋值出现在构造函数内，说明未启用 define 语义 */
+    "useDefineForClassFields": false,
+
+    /* 兼容性 */
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+
+    /*
+     * 严格模式说明：
+     * 编译过程会擦除函数内部/局部变量的类型注解，本目录是由 dist 编译产物
+     * 逆向重建的，只有被 .d.ts 覆盖到的公开接口能还原类型。因此这里放宽
+     * 隐式 any 与空值检查，保证工程可直接编译；如需开启严格模式，需要
+     * 逐个文件补齐内部类型注解。
+     */
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitThis": false,
+    "noFallthroughCasesInSwitch": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
