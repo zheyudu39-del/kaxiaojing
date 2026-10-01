@@ -1,37 +1,66 @@
 import { request } from '@/utils/request'
 import type { Team, TeamMember, JoinRequest, TeamTask } from '@/types'
 
+/**
+ * 注意：后端多个接口返回的是包装对象而非裸数组，这里统一解包。
+ * 另外创建队伍用的字段是 camelCase 的 competitionId（不是 competition_id）。
+ */
 export const teamApi = {
-  my: () => request.get<Team[]>('/teams/my'),
+  my: () => request.get<{ teams: Team[] }>('/teams/my').then((r) => r?.teams ?? []),
+
   all: (params?: { page?: number; pageSize?: number; keyword?: string }) =>
-    request.get<{ teams: Team[]; total: number }>('/teams/all', { params }),
+    request.get<{ teams: Team[]; total?: number }>('/teams/all', { params }),
+
   byCompetition: (competitionId: number | string) =>
-    request.get<Team[]>(`/teams/competition/${competitionId}`),
+    request
+      .get<{ teams: Team[] }>(`/teams/competition/${competitionId}`)
+      .then((r) => r?.teams ?? []),
+
   detail: (teamId: number | string) => request.get<Team>(`/teams/${teamId}`),
 
-  create: (body: { name: string; competition_id: number; description?: string; max_members?: number }) =>
-    request.post<{ id: number }>('/teams', body),
-  remove: (teamId: number | string) => request.delete(`/teams/${teamId}`),
-  leave: (teamId: number | string) => request.delete(`/teams/${teamId}/leave`),
+  create: (body: { competitionId: number; name: string; description?: string }) =>
+    request.post<Team>('/teams', body),
 
-  members: (teamId: number | string) => request.get<TeamMember[]>(`/teams/${teamId}/members`),
+  remove: (teamId: number | string) => request.delete<{ message: string }>(`/teams/${teamId}`),
+  leave: (teamId: number | string) => request.delete<{ message: string }>(`/teams/${teamId}/leave`),
+
+  members: (teamId: number | string) =>
+    request
+      .get<{ members: TeamMember[] }>(`/teams/${teamId}/members`)
+      .then((r) => r?.members ?? []),
+
   removeMember: (teamId: number | string, userId: number) =>
-    request.delete(`/teams/${teamId}/members/${userId}`),
-  transferLeader: (teamId: number | string, userId: number) =>
-    request.put(`/teams/${teamId}/transfer-leader`, { userId }),
+    request.delete<{ message: string }>(`/teams/${teamId}/members/${userId}`),
 
-  joinRequests: (teamId: number | string) => request.get<JoinRequest[]>(`/teams/${teamId}/join-requests`),
-  apply: (teamId: number | string, message?: string) =>
-    request.post(`/teams/${teamId}/join-requests`, { message }),
+  transferLeader: (teamId: number | string, newLeaderId: number) =>
+    request.put<{ message: string }>(`/teams/${teamId}/transfer-leader`, { newLeaderId }),
+
+  joinRequests: (teamId: number | string) =>
+    request
+      .get<{ requests: JoinRequest[] }>(`/teams/${teamId}/join-requests`)
+      .then((r) => r?.requests ?? []),
+
+  apply: (teamId: number | string) =>
+    request.post<{ message: string }>(`/teams/${teamId}/join-requests`),
+
   reviewRequest: (teamId: number | string, requestId: number, action: 'approve' | 'reject') =>
-    request.put(`/teams/${teamId}/join-requests/${requestId}`, { action }),
+    request.put<{ message: string }>(`/teams/${teamId}/join-requests/${requestId}`, { action }),
 
-  invites: (teamId: number | string) => request.get<any[]>(`/teams/${teamId}/invites`),
-  createInvite: (teamId: number | string, body?: { expires_in_hours?: number; max_uses?: number }) =>
-    request.post<any>(`/teams/${teamId}/invites`, body),
+  invites: (teamId: number | string) =>
+    request
+      .get<{ invites: any[] }>(`/teams/${teamId}/invites`)
+      .then((r) => r?.invites ?? []),
+
+  createInvite: (teamId: number | string, body?: { expires_hours?: number; max_uses?: number }) =>
+    request.post<any>(`/teams/${teamId}/invites`, body ?? {}),
+
   revokeInvite: (teamId: number | string, inviteId: number) =>
-    request.delete(`/teams/${teamId}/invites/${inviteId}`),
-  joinByCode: (invite_code: string) => request.post<{ team_id: number }>('/teams/join-by-code', { invite_code }),
+    request.delete<{ message: string }>(`/teams/${teamId}/invites/${inviteId}`),
+
+  joinByCode: (invite_code: string) =>
+    request.post<{ message: string; team_name: string; team_id: number }>('/teams/join-by-code', {
+      invite_code,
+    }),
 
   /** 队伍群聊消息 */
   messages: (teamId: number | string, params?: { limit?: number; before?: number }) =>
