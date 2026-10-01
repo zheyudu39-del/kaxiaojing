@@ -77,6 +77,11 @@ class FeedbackService {
         return { feedbacks, total: total.count };
     }
     updateStatus(id, status) {
+        // 注意：数据库对 status 有 CHECK 约束，但未校验时会把 undefined 直接绑进 SQL 导致 500，
+        // 这里先做白名单校验，路由层据此返回 400。
+        const VALID = ['pending', 'processing', 'resolved', 'closed'];
+        if (!VALID.includes(status))
+            throw new Error('INVALID_STATUS');
         const db = getDb();
         db.prepare('UPDATE user_feedback SET status = @status WHERE id = @id').run({ id, status });
         return this.getById(id);

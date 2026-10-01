@@ -71,7 +71,10 @@ class ResourceService {
     }
     rateResource(resourceId, userId, rating) {
         const db = getDb();
-        if (rating < 1 || rating > 5)
+        // 注意：直接用 `rating < 1 || rating > 5` 无法拦住 undefined/字符串，
+        // 因为 undefined 与数字比较恒为 false，会绕过校验直接写库导致 500。
+        const r = Number(rating);
+        if (!Number.isFinite(r) || r < 1 || r > 5)
             throw new Error('INVALID_RATING');
         const resource = db.prepare('SELECT id FROM resources WHERE id = @id AND deleted_at IS NULL').get({ id: resourceId });
         if (!resource)

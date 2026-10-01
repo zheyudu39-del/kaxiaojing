@@ -49,7 +49,17 @@ router.get('/admin', authMiddleware, adminMiddleware, (req, res) => {
 router.patch('/admin/:id/status', authMiddleware, adminMiddleware, (req, res) => {
     const id = parseInt(req.params.id);
     const { status } = req.body;
-    const feedback = feedbackService.updateStatus(id, status);
+    let feedback;
+    try {
+        feedback = feedbackService.updateStatus(id, status);
+    }
+    catch (err) {
+        if (err.message === 'INVALID_STATUS') {
+            res.status(400).json({ error: '状态无效，可选值：pending / processing / resolved / closed' });
+            return;
+        }
+        throw err;
+    }
     if (!feedback) {
         res.status(404).json({ error: '反馈不存在' });
         return;
