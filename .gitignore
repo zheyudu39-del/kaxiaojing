@@ -8,9 +8,11 @@ node_modules/
 # 但模板文件要保留
 !.env.example
 
-# ===== 编译产物（由 npm run build 生成）=====
+# ===== 构建产物 =====
 dist/
+build/
 dist-rebuild/
+*.tsbuildinfo
 
 # ===== 运行时数据：属数据不属代码 =====
 data/
