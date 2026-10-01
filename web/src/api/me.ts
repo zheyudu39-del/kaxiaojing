@@ -22,7 +22,7 @@ export const profileApi = {
   addAward: (body: any) => request.post('/profile/awards', body),
   removeAward: (awardId: number) => request.delete(`/profile/awards/${awardId}`),
 
-  skills: () => request.get<string[]>('/profile/skills'),
+  skills: () => request.get<{ skills: string[] }>('/profile/skills').then((r) => r?.skills ?? []),
   addSkill: (skill: string) => request.post('/profile/skills', { skill }),
   removeSkill: (skill: string) => request.delete(`/profile/skills/${encodeURIComponent(skill)}`),
 }
