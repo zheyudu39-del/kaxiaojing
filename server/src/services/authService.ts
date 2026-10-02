@@ -93,7 +93,10 @@ export class AuthService {
     verifyToken(token: string): TokenPayload {
         try {
             const decoded = jsonwebtoken.verify(token, getJwtSecret());
-            return decoded;
+            if (typeof decoded === 'string') {
+                throw new AuthError('认证已过期，请重新登录', 401);
+            }
+            return decoded as TokenPayload;
         }
         catch {
             throw new AuthError('认证已过期，请重新登录', 401);

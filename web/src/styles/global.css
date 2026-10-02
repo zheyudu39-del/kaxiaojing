@@ -16,6 +16,15 @@ body,
   margin: 0;
 }
 
+/* 防御：任何单个元素都不应把整页撑出横向滚动条。
+   表格等确实需要横向滚动的区域已在组件内自带 scroll 容器，
+   这里只兜住异常溢出（如断点切换瞬间的栅格宽度）。 */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -25,12 +34,14 @@ body {
 
 /* ---------- 修复 1：底部固定栏遮挡内容 ----------
    旧版移动端底部导航（56px）+ 安装横幅会压住页面最后一行。
-   这里给所有页面容器预留安全区，横幅出现时由组件再叠加。 */
+   这里给所有页面容器预留安全区，横幅出现时由组件再叠加。
+   断点与 useIsMobile()（991px）保持一致，避免 768~991px 区间出现
+   底部导航已显示、内容区却没留安全区的错位。 */
 .page-container {
   padding-bottom: 24px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .page-container {
     padding-bottom: calc(var(--safe-bottom) + 16px);
   }
@@ -126,11 +137,42 @@ body {
   }
 }
 
-/* 聊天类页面：占满高度且内部滚动 */
+/* 聊天类页面：占满可见高度且内部滚动。
+   高度 = 视口 - 顶栏 - 页面上下留白；移动端再减去底部导航，避免输入框被遮住。
+   注意移动端 MainLayout 的 padding 是 12px（上下各 12），故留白按 24 计。 */
 .chat-page {
   display: flex;
   flex-direction: column;
   height: calc(100vh - var(--header-h) - 48px);
+}
+
+@media (max-width: 991px) {
+  .chat-page {
+    /* 64(顶栏) + 24(页面上下留白) + 底部导航及安全区 */
+    height: calc(100vh - var(--header-h) - 24px - var(--safe-bottom));
+    min-height: 320px;
+  }
+}
+
+/* 让聊天页这类"铺满一屏"的页面用 flex 自适应，而不是手写 100vh 算式。
+   .fill-viewport 撑满可视高度，内部的 .chat-page--flex 占据剩余空间，
+   这样 PageHeader / Card 的实际高度变化都能自动吸收，输入框不会被底部导航压住。 */
+.fill-viewport {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-h) - 48px);
+}
+
+@media (max-width: 991px) {
+  .fill-viewport {
+    height: calc(100vh - var(--header-h) - 24px - var(--safe-bottom));
+  }
+}
+
+.fill-viewport > .chat-page--flex {
+  flex: 1;
+  min-height: 0;
+  height: auto;
 }
 
 .chat-page__body {

@@ -64,10 +64,11 @@ export default function Ranking() {
                 </Link>
               ),
             },
-            { title: '积分', dataIndex: 'score', width: 100, sorter: (a: any, b: any) => a.score - b.score },
-            { title: '获奖数', dataIndex: 'award_count', width: 100, render: (v: number) => v ?? 0 },
-            { title: '参赛数', dataIndex: 'competition_count', width: 100, render: (v: number) => v ?? 0 },
+            { title: '积分', dataIndex: 'score', width: 80, sorter: (a: any, b: any) => a.score - b.score },
+            { title: '获奖数', dataIndex: 'award_count', width: 80, render: (v: number) => v ?? 0 },
+            { title: '参赛数', dataIndex: 'competition_count', width: 80, render: (v: number) => v ?? 0 },
           ]}
+          scroll={{ x: 'max-content' }}
         />
       </Card>
     </div>

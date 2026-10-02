@@ -136,7 +136,12 @@ app.use('/api/', (req, res, next) => {
         return;
     }
     // 验证 Origin 或 Referer 头与允许的域名列表匹配
-    const allowedOrigins = getCorsOptions().origin;
+    const rawOrigins = getCorsOptions().origin;
+    const allowedOrigins: string[] = Array.isArray(rawOrigins)
+        ? (rawOrigins as unknown[]).filter((o): o is string => typeof o === 'string')
+        : typeof rawOrigins === 'string'
+            ? [rawOrigins]
+            : [];
     if (requestOrigin && !allowedOrigins.includes(requestOrigin)) {
         res.status(403).json({ error: 'CSRF验证失败：来源不在允许列表中' });
         return;

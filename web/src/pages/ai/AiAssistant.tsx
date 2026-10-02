@@ -65,7 +65,7 @@ export default function AiAssistant() {
   }, [])
 
   return (
-    <div>
+    <div className="fill-viewport">
       <PageHeader
         title="AI 助手"
         description="竞赛咨询、备赛建议、组队问题都可以问"
@@ -78,9 +78,12 @@ export default function AiAssistant() {
         }
       />
 
-      <Card styles={{ body: { padding: 0 } }}>
-        <div style={{ height: 'calc(100vh - 260px)', display: 'flex', flexDirection: 'column' }}>
-          <div ref={bodyRef} style={{ flex: 1, overflowY: 'auto', padding: 16 }}>
+      <Card
+        style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+        styles={{ body: { padding: 0, flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
+      >
+        <div className="chat-page chat-page--flex" style={{ paddingBottom: 0 }}>
+          <div className="chat-page__body" ref={bodyRef} style={{ padding: 16 }}>
             {messages.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '40px 16px' }}>
                 <RobotOutlined style={{ fontSize: 48, color: '#1890ff' }} />

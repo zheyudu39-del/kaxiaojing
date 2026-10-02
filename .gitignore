@@ -12,6 +12,7 @@ node_modules/
 dist/
 build/
 dist-rebuild/
+dist-verify/
 *.tsbuildinfo
 
 # ===== 运行时数据：属数据不属代码 =====

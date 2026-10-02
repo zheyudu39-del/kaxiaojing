@@ -80,7 +80,7 @@ export default function Lobby() {
   }
 
   return (
-    <div>
+    <div className="fill-viewport">
       <PageHeader
         title="交流大厅"
         description={
@@ -105,8 +105,11 @@ export default function Lobby() {
         }
       />
 
-      <Card styles={{ body: { padding: 0 } }}>
-        <div className="chat-page" style={{ height: 'calc(100vh - 240px)' }}>
+      <Card
+        style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+        styles={{ body: { padding: 0, flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
+      >
+        <div className="chat-page chat-page--flex">
           <div className="chat-page__body" ref={bodyRef} style={{ padding: '16px 16px 0' }}>
             {loading ? (
               <div style={{ textAlign: 'center', padding: 32 }}>

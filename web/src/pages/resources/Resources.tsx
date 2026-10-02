@@ -177,7 +177,7 @@ export default function Resources() {
             {
               title: '竞赛',
               dataIndex: 'competition_name',
-              width: 200,
+              width: 160,
               ellipsis: true,
               render: (v: string, r: any) =>
                 r.competition_id ? (
@@ -189,13 +189,14 @@ export default function Resources() {
             {
               title: '上传者',
               dataIndex: 'username',
-              width: 110,
+              width: 100,
+              ellipsis: true,
               render: (v: string, r: any) => (r.user_id ? <Link to={`/users/${r.user_id}`}>{v || `#${r.user_id}`}</Link> : '-'),
             },
             {
               title: '类型',
               dataIndex: 'file_type',
-              width: 90,
+              width: 80,
               render: (t: string, r: any) => {
                 const meta = TYPE_META[t] || (r.url ? TYPE_META.link : null)
                 return meta ? <Tag color={meta.color}>{meta.label}</Tag> : '-'
@@ -204,14 +205,14 @@ export default function Resources() {
             {
               title: '大小',
               dataIndex: 'file_size',
-              width: 90,
+              width: 80,
               render: (v: number) => (v ? `${(v / 1024).toFixed(0)} KB` : '-'),
             },
-            { title: '下载量', dataIndex: 'download_count', width: 80, render: (v: number) => v ?? 0 },
+            { title: '下载量', dataIndex: 'download_count', width: 72, render: (v: number) => v ?? 0 },
             {
               title: '评分',
               dataIndex: 'rating',
-              width: 150,
+              width: 130,
               render: (v: number, r: any) => (
                 <Rate
                   value={v || 0}
@@ -221,10 +222,10 @@ export default function Resources() {
                 />
               ),
             },
-            { title: '上传时间', dataIndex: 'created_at', width: 170 },
+            { title: '上传时间', dataIndex: 'created_at', width: 150, render: (v: string) => v || '-' },
             {
               title: '操作',
-              width: 90,
+              width: 84,
               fixed: 'right',
               render: (_: any, r: any) =>
                 r.url ? (
@@ -242,7 +243,7 @@ export default function Resources() {
                 ),
             },
           ]}
-          scroll={{ x: 1100 }}
+          scroll={{ x: 940 }}
         />
       </Card>
 

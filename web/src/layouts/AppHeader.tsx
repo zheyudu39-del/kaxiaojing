@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Badge, Button, Dropdown, Input, Space, Tooltip, Avatar } from 'antd'
 import {
@@ -10,10 +10,12 @@ import {
   LogoutOutlined,
   SettingOutlined,
   RobotOutlined,
+  CompassOutlined,
 } from '@ant-design/icons'
 import { NAV_ITEMS, PRIMARY_LIMIT } from './navConfig'
 import { useAuthStore } from '@/stores/auth'
 import { useNotificationCount } from '@/hooks/useNotificationCount'
+import { useIsMobile } from '@/hooks/useMediaQuery'
 
 interface Props {
   onToggleSider?: () => void
@@ -26,6 +28,8 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
   const token = useAuthStore((s) => s.token)
   const logout = useAuthStore((s) => s.logout)
   const unread = useNotificationCount()
+  const isMobile = useIsMobile()
+  const [searchOpen, setSearchOpen] = useState(false)
 
   const isActive = (path: string) =>
     path === '/dashboard' ? location.pathname === '/dashboard' : location.pathname.startsWith(path)
@@ -41,6 +45,11 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
     (i) => !i.primary && (!i.auth || token) && (!i.admin || user?.role === 'admin'),
   )
 
+  // 移动端：全部导航收进「导航」下拉（底部已有主导航，顶部不再重复展示）
+  const mobileNavItems = NAV_ITEMS.filter(
+    (i) => !i.tab && (!i.auth || token) && (!i.admin || user?.role === 'admin'),
+  )
+
   return (
     <header
       style={{
@@ -50,8 +59,8 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
         height: 64,
         display: 'flex',
         alignItems: 'center',
-        gap: 16,
-        padding: '0 16px',
+        gap: isMobile ? 8 : 16,
+        padding: isMobile ? '0 10px' : '0 16px',
         background: '#001529',
         color: '#fff',
       }}
@@ -60,67 +69,119 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
         <Button type="text" icon={<MenuOutlined />} onClick={onToggleSider} style={{ color: '#fff' }} />
       )}
 
-      <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', flexShrink: 0 }}>
+      <Link
+        to="/dashboard"
+        style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', flexShrink: 0 }}
+      >
         <img src="/logo.png" alt="喀小竞" style={{ width: 32, height: 32, borderRadius: 6, objectFit: 'cover' }} />
-        <span style={{ fontSize: 16, fontWeight: 500, whiteSpace: 'nowrap' }}>喀小竞</span>
+        {!isMobile && <span style={{ fontSize: 16, fontWeight: 500, whiteSpace: 'nowrap' }}>喀小竞</span>}
       </Link>
 
-      <nav style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, overflow: 'hidden' }}>
-        {mainItems.map((item) => (
-          <Link
-            key={item.key}
-            to={item.path}
-            style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              fontSize: 14,
-              whiteSpace: 'nowrap',
-              color: isActive(item.path) ? '#fff' : 'rgba(255,255,255,.72)',
-              background: isActive(item.path) ? 'rgba(24,144,255,.35)' : 'transparent',
+      {/* 移动端：导航收进下拉，避免旧版顶部导航横向溢出 */}
+      {isMobile ? (
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <Dropdown
+            placement="bottomLeft"
+            menu={{
+              items: mobileNavItems.map((i) => ({
+                key: i.key,
+                icon: i.icon,
+                label: <Link to={i.path}>{i.label}</Link>,
+              })),
             }}
           >
-            {item.label}
-          </Link>
-        ))}
+            <Button type="text" icon={<CompassOutlined />} style={{ color: '#fff' }}>
+              导航 <DownOutlined style={{ fontSize: 10 }} />
+            </Button>
+          </Dropdown>
+        </div>
+      ) : (
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, overflow: 'hidden' }}>
+          {mainItems.map((item) => (
+            <Link
+              key={item.key}
+              to={item.path}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 6,
+                fontSize: 14,
+                whiteSpace: 'nowrap',
+                color: isActive(item.path) ? '#fff' : 'rgba(255,255,255,.72)',
+                background: isActive(item.path) ? 'rgba(24,144,255,.35)' : 'transparent',
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
 
-        <Dropdown
-          menu={{
-            items: moreItems.map((i) => ({
-              key: i.key,
-              icon: i.icon,
-              label: <Link to={i.path}>{i.label}</Link>,
-            })),
-          }}
-        >
-          <span
-            style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              fontSize: 14,
-              cursor: 'pointer',
-              color: 'rgba(255,255,255,.72)',
-              whiteSpace: 'nowrap',
+          <Dropdown
+            menu={{
+              items: moreItems.map((i) => ({
+                key: i.key,
+                icon: i.icon,
+                label: <Link to={i.path}>{i.label}</Link>,
+              })),
             }}
           >
-            更多 <DownOutlined style={{ fontSize: 10 }} />
-          </span>
-        </Dropdown>
-      </nav>
+            <span
+              style={{
+                padding: '6px 12px',
+                borderRadius: 6,
+                fontSize: 14,
+                cursor: 'pointer',
+                color: 'rgba(255,255,255,.72)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              更多 <DownOutlined style={{ fontSize: 10 }} />
+            </span>
+          </Dropdown>
+        </nav>
+      )}
 
-      <Space size={12} style={{ flexShrink: 0 }}>
-        <Input
-          allowClear
-          prefix={<SearchOutlined style={{ color: 'rgba(255,255,255,.45)' }} />}
-          placeholder="搜索竞赛、帖子、资料"
-          style={{ width: 200 }}
-          onPressEnter={(e) => onSearch?.((e.target as HTMLInputElement).value)}
-        />
+      <Space size={isMobile ? 8 : 12} style={{ flexShrink: 0 }}>
+        {/* 移动端搜索框改为图标展开，避免固定 200px 撑破头部 */}
+        {isMobile ? (
+          searchOpen ? (
+            <Input
+              autoFocus
+              allowClear
+              size="small"
+              prefix={<SearchOutlined style={{ color: 'rgba(255,255,255,.45)' }} />}
+              placeholder="搜索"
+              style={{ width: 130 }}
+              onBlur={() => setSearchOpen(false)}
+              onPressEnter={(e) => {
+                onSearch?.((e.target as HTMLInputElement).value)
+                setSearchOpen(false)
+              }}
+            />
+          ) : (
+            <Button
+              type="text"
+              icon={<SearchOutlined style={{ fontSize: 18 }} />}
+              onClick={() => setSearchOpen(true)}
+              style={{ color: '#fff' }}
+              aria-label="搜索"
+            />
+          )
+        ) : (
+          <Input
+            allowClear
+            prefix={<SearchOutlined style={{ color: 'rgba(255,255,255,.45)' }} />}
+            placeholder="搜索竞赛、帖子、资料"
+            style={{ width: 200 }}
+            onPressEnter={(e) => onSearch?.((e.target as HTMLInputElement).value)}
+          />
+        )}
 
-        <Tooltip title="AI 助手">
-          <Link to="/ai-assistant" style={{ color: '#fff' }}>
-            <RobotOutlined style={{ fontSize: 18 }} />
-          </Link>
-        </Tooltip>
+        {!isMobile && (
+          <Tooltip title="AI 助手">
+            <Link to="/ai-assistant" style={{ color: '#fff' }}>
+              <RobotOutlined style={{ fontSize: 18 }} />
+            </Link>
+          </Tooltip>
+        )}
 
         <Tooltip title="通知">
           <Link to="/notifications" style={{ color: '#fff' }}>
@@ -150,21 +211,25 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
           >
             <Space style={{ cursor: 'pointer', color: '#fff' }}>
               <Avatar size={28} src={user?.avatar_url || undefined} icon={<UserOutlined />} />
-              <span style={{ maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user?.username}
-              </span>
+              {!isMobile && (
+                <span style={{ maxWidth: 80, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {user?.username}
+                </span>
+              )}
             </Space>
           </Dropdown>
         ) : (
-          <Space>
+          <Space size={isMobile ? 4 : 8}>
             <Link to="/login">
               <Button type="text" style={{ color: '#fff' }}>
                 登录
               </Button>
             </Link>
-            <Link to="/register">
-              <Button type="primary">注册</Button>
-            </Link>
+            {!isMobile && (
+              <Link to="/register">
+                <Button type="primary">注册</Button>
+              </Link>
+            )}
           </Space>
         )}
       </Space>
