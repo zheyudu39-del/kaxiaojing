@@ -1,9 +1,9 @@
 {
-  "ranAt": "2026-10-01T17:51:16.293Z",
+  "ranAt": "2026-10-02T10:44:09.741Z",
   "base": "http://127.0.0.1:5000",
   "summary": {
-    "NOT_FOUND": 50,
-    "OK": 165,
+    "NOT_FOUND": 48,
+    "OK": 167,
     "FORBIDDEN": 53,
     "VALIDATION_OK": 55,
     "BAD_REQUEST": 3
@@ -367,7 +367,7 @@
       "url": "/api/ai/history",
       "status": 201,
       "verdict": "OK",
-      "sample": "{\"id\":3}"
+      "sample": "{\"id\":1}"
     },
     {
       "method": "DELETE",
@@ -703,7 +703,7 @@
       "url": "/api/cert-plans/1/checkins",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"checkins\":[{\"id\":3,\"user_id\":10,\"certificate_id\":1,\"note\":\"\",\"created_at\":\"2026-10-01 17:51:15\"}],"
+      "sample": "{\"checkins\":[{\"id\":1,\"user_id\":9,\"certificate_id\":1,\"note\":\"\",\"created_at\":\"2026-10-02 10:44:09\"}],\""
     },
     {
       "method": "GET",
@@ -763,7 +763,7 @@
       "url": "/api/colleges",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"colleges\":[{\"id\":1,\"name\":\"马克思主义学院\"},{\"id\":2,\"name\":\"法政学院\"},{\"id\":3,\"name\":\"教育科学学院\"},{\"id\":4,\"name"
+      "sample": "{\"colleges\":[{\"id\":1,\"name\":\"化学与环境科学学院\"},{\"id\":2,\"name\":\"生命与地理科学学院\"},{\"id\":3,\"name\":\"人文学院\"},{\"id\":4,"
     },
     {
       "method": "GET",
@@ -787,7 +787,7 @@
       "url": "/api/colleges/1/majors",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"majors\":[{\"id\":1,\"name\":\"思想政治教育\",\"college_id\":1}]}"
+      "sample": "{\"majors\":[{\"id\":1,\"name\":\"化学\",\"college_id\":1},{\"id\":2,\"name\":\"应用化学\",\"college_id\":1},{\"id\":3,\"name\":"
     },
     {
       "method": "GET",
@@ -799,7 +799,7 @@
       "url": "/api/competitions?page=1&pageSize=5",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"competitions\":[{\"id\":2,\"name\":\"\\\"挑战杯\\\"全国大学生课外学术科技作品竞赛\",\"category\":\"综合类\",\"description\":\"被誉为中国大学生科技创"
+      "sample": "{\"competitions\":[{\"id\":1,\"name\":\"中国国际大学生创新大赛\",\"category\":\"综合类\",\"description\":\"原中国国际\\\"互联网+\\\"大学生创新创业大赛"
     },
     {
       "method": "POST",
@@ -821,9 +821,9 @@
       "admin": false,
       "line": 60,
       "url": "/api/competitions/1",
-      "status": 404,
-      "verdict": "NOT_FOUND",
-      "sample": "{\"error\":\"竞赛不存在\"}"
+      "status": 200,
+      "verdict": "OK",
+      "sample": "{\"competition\":{\"id\":1,\"name\":\"中国国际大学生创新大赛\",\"category\":\"综合类\",\"description\":\"原中国国际\\\"互联网+\\\"大学生创新创业大赛，鼓"
     },
     {
       "method": "GET",
@@ -919,7 +919,7 @@
       "url": "/api/competitions/1/related",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"competitions\":[]}"
+      "sample": "{\"competitions\":[{\"id\":3,\"name\":\"\\\"挑战杯\\\"中国大学生创业计划竞赛\",\"category\":\"综合类\",\"description\":\"大学生创业计划竞赛，培养创业意"
     },
     {
       "method": "DELETE",
@@ -1051,7 +1051,7 @@
       "url": "/api/dashboard",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"total_users\":10,\"total_competitions\":84,\"total_teams\":0,\"upcoming_competitions\":[{\"id\":33,\"name\":\""
+      "sample": "{\"total_users\":9,\"total_competitions\":84,\"total_teams\":0,\"upcoming_competitions\":[{\"id\":33,\"name\":\"全"
     },
     {
       "method": "GET",
@@ -1111,7 +1111,7 @@
       "url": "/api/data-dashboard/overview",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"totalUsers\":10,\"totalCompetitions\":84,\"totalTeams\":0,\"totalPosts\":0,\"totalRegistrations\":0,\"totalA"
+      "sample": "{\"totalUsers\":9,\"totalCompetitions\":84,\"totalTeams\":0,\"totalPosts\":0,\"totalRegistrations\":0,\"totalAw"
     },
     {
       "method": "GET",
@@ -1387,7 +1387,7 @@
       "url": "/api/follows/1/counts",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"following\":0,\"followers\":3}"
+      "sample": "{\"following\":0,\"followers\":1}"
     },
     {
       "method": "GET",
@@ -1399,7 +1399,7 @@
       "url": "/api/follows/1/followers",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"users\":[{\"id\":10,\"username\":\"apitest77075494\",\"avatar_url\":null,\"bio\":null},{\"id\":9,\"username\":\"ap"
+      "sample": "{\"users\":[{\"id\":9,\"username\":\"apitest37848978\",\"avatar_url\":null,\"bio\":null}],\"total\":1}"
     },
     {
       "method": "GET",
@@ -1651,7 +1651,7 @@
       "url": "/api/mentors/my/applications",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"applications\":[{\"id\":5,\"mentee_id\":10,\"mentor_id\":1,\"competition_id\":null,\"message\":\"\",\"status\":\"p"
+      "sample": "{\"applications\":[{\"id\":3,\"mentee_id\":9,\"mentor_id\":1,\"competition_id\":null,\"message\":\"\",\"status\":\"pe"
     },
     {
       "method": "GET",
@@ -2215,7 +2215,7 @@
       "url": "/api/profile",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"id\":10,\"username\":\"apitest77075494\",\"email\":\"apitest_77075494@test.local\",\"college\":null,\"major\":n"
+      "sample": "{\"id\":9,\"username\":\"apitest37848978\",\"email\":\"apitest_37848978@test.local\",\"college\":null,\"major\":nu"
     },
     {
       "method": "PUT",
@@ -2227,7 +2227,7 @@
       "url": "/api/profile",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"id\":10,\"username\":\"apitest77075494\",\"email\":\"apitest_77075494@test.local\",\"college\":null,\"major\":n"
+      "sample": "{\"id\":9,\"username\":\"apitest37848978\",\"email\":\"apitest_37848978@test.local\",\"college\":null,\"major\":nu"
     },
     {
       "method": "GET",
@@ -2707,7 +2707,7 @@
       "url": "/api/recommend/trending",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"competitions\":[{\"id\":2,\"name\":\"\\\"挑战杯\\\"全国大学生课外学术科技作品竞赛\",\"category\":\"综合类\",\"description\":\"被誉为中国大学生科技创"
+      "sample": "{\"competitions\":[{\"id\":1,\"name\":\"中国国际大学生创新大赛\",\"category\":\"综合类\",\"description\":\"原中国国际\\\"互联网+\\\"大学生创新创业大赛"
     },
     {
       "method": "GET",
@@ -2875,7 +2875,7 @@
       "url": "/api/report/monthly",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"type\":\"month\",\"period\":{\"start\":\"2026-09-01\",\"end\":\"2026-10-01\"},\"summary\":{\"checkinDays\":0,\"total"
+      "sample": "{\"type\":\"month\",\"period\":{\"start\":\"2026-09-02\",\"end\":\"2026-10-02\"},\"summary\":{\"checkinDays\":0,\"total"
     },
     {
       "method": "GET",
@@ -2887,7 +2887,7 @@
       "url": "/api/report/weekly",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"type\":\"week\",\"period\":{\"start\":\"2026-09-24\",\"end\":\"2026-10-01\"},\"summary\":{\"checkinDays\":0,\"totalS"
+      "sample": "{\"type\":\"week\",\"period\":{\"start\":\"2026-09-25\",\"end\":\"2026-10-02\"},\"summary\":{\"checkinDays\":0,\"totalS"
     },
     {
       "method": "GET",
@@ -3113,9 +3113,9 @@
       "admin": false,
       "line": 21,
       "url": "/api/statistics/competition/1",
-      "status": 404,
-      "verdict": "NOT_FOUND",
-      "sample": "{\"error\":\"竞赛不存在\"}"
+      "status": 200,
+      "verdict": "OK",
+      "sample": "{\"id\":1,\"name\":\"中国国际大学生创新大赛\",\"category\":\"综合类\",\"team_count\":0,\"participant_count\":0,\"college_distribu"
     },
     {
       "method": "GET",
@@ -3139,7 +3139,7 @@
       "url": "/api/statistics/overview",
       "status": 200,
       "verdict": "OK",
-      "sample": "{\"total_users\":10,\"total_teams\":0,\"total_participations\":0,\"total_posts\":0,\"total_awards\":0,\"total_r"
+      "sample": "{\"total_users\":9,\"total_teams\":0,\"total_participations\":0,\"total_posts\":0,\"total_awards\":0,\"total_re"
     },
     {
       "method": "GET",
@@ -3271,7 +3271,7 @@
       "url": "/api/study-checkin/plans/1/checkins",
       "status": 201,
       "verdict": "OK",
-      "sample": "{\"id\":3}"
+      "sample": "{\"id\":1}"
     },
     {
       "method": "PATCH",
