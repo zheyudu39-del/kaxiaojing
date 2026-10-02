@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node --transpile-only src/index.ts",
+    "reseed:colleges": "ts-node --transpile-only src/scripts/reseedColleges.ts",
+    "reseed:colleges:dry": "ts-node --transpile-only src/scripts/reseedColleges.ts --dry-run",
     "test": "jest --forceExit --detectOpenHandles",
     "test:watch": "jest --watch --forceExit --detectOpenHandles"
   },
