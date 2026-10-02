@@ -1,0 +1,730 @@
+{
+  "source": {
+    "university": "喀什大学",
+    "generated_at": "2026-10-02T18:36:46+08:00",
+    "sources": [
+      {
+        "name": "教学机构（学院）列表",
+        "url": "https://www.ksu.edu.cn/zzjg/jx_ky_jfdw.htm"
+      },
+      {
+        "name": "2026年普通本科招生专业与计划",
+        "url": "https://xgb.ksu.edu.cn/info/1511/9361.htm"
+      },
+      {
+        "name": "国家级一流本科专业",
+        "url": "https://jwc.ksu.edu.cn/info/1151/2999.htm"
+      },
+      {
+        "name": "自治区级一流本科专业",
+        "url": "https://jwc.ksu.edu.cn/info/1151/2989.htm"
+      }
+    ],
+    "admission_file": "喀什大学2026年普通本科招生专业与计划.xlsx"
+  },
+  "stats": {
+    "college_count": 25,
+    "major_count": 75,
+    "colleges_with_majors": 23
+  },
+  "colleges": [
+    {
+      "name": "化学与环境科学学院",
+      "website": "https://hhy.ksu.edu.cn/",
+      "major_count": 6,
+      "majors": [
+        {
+          "name": "化学",
+          "code": "070301",
+          "category": "化学类",
+          "discipline": "理学",
+          "level": "自治区级"
+        },
+        {
+          "name": "应用化学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "环境科学与工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "环境科学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "化学工程与工艺",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "资源循环科学与工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "生命与地理科学学院",
+      "website": "https://sdy.ksu.edu.cn/",
+      "major_count": 6,
+      "majors": [
+        {
+          "name": "生物科学",
+          "code": "071001",
+          "category": "生物科学类",
+          "discipline": "理学",
+          "level": "自治区级"
+        },
+        {
+          "name": "地理科学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "生物技术",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "食品科学与工程",
+          "code": "082701",
+          "category": "食品科学与工程类",
+          "discipline": "工学",
+          "level": "自治区级"
+        },
+        {
+          "name": "食品质量与安全",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "大气科学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "人文学院",
+      "website": "https://rwy.ksu.edu.cn/",
+      "major_count": 5,
+      "majors": [
+        {
+          "name": "汉语言文学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "汉语国际教育",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "中国少数民族语言文学（维吾尔语言文学）",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "中国少数民族语言文学（维吾尔语言）",
+          "code": "050104",
+          "category": "中国语言文学类",
+          "discipline": "文学",
+          "level": "国家级"
+        },
+        {
+          "name": "历史学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "计算机科学与技术学院",
+      "website": "https://ie.ksu.edu.cn/",
+      "major_count": 5,
+      "majors": [
+        {
+          "name": "网络工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "计算机科学与技术",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "数字媒体技术",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "人工智能",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "数据科学与大数据技术",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "交通学院",
+      "website": "http://jty.ksu.edu.cn",
+      "major_count": 4,
+      "majors": [
+        {
+          "name": "交通工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "物流工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "道路桥梁与渡河工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "交通运输",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "医学院",
+      "website": "https://yxy.ksu.edu.cn/",
+      "major_count": 4,
+      "majors": [
+        {
+          "name": "护理学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "预防医学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "卫生检验与检疫",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "临床医学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "教育科学学院",
+      "website": "https://jyy.ksu.edu.cn/",
+      "major_count": 4,
+      "majors": [
+        {
+          "name": "教育学",
+          "code": "040101",
+          "category": "教育学类",
+          "discipline": "教育学",
+          "level": "自治区级"
+        },
+        {
+          "name": "学前教育",
+          "code": "040106",
+          "category": "教育学类",
+          "discipline": "教育学",
+          "level": "国家级"
+        },
+        {
+          "name": "小学教育",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "心理学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "数学与统计学院",
+      "website": "https://sty.ksu.edu.cn/",
+      "major_count": 4,
+      "majors": [
+        {
+          "name": "数学与应用数学",
+          "code": "070101",
+          "category": "数学类",
+          "discipline": "理学",
+          "level": "国家级"
+        },
+        {
+          "name": "信息与计算科学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "应用统计学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "金融数学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "经济与管理学院",
+      "website": "https://jgy.ksu.edu.cn/",
+      "major_count": 4,
+      "majors": [
+        {
+          "name": "经济统计学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "国际经济与贸易",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "财务管理",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "跨境电子商务",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "体育学院",
+      "website": "http://tyy.ksu.edu.cn",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "体育教育",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "体育教育（校园足球方向）",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "社会体育指导与管理",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "土木工程学院",
+      "website": "https://tmy.ksu.edu.cn/",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "土木工程",
+          "code": "081001",
+          "category": "土木类",
+          "discipline": "工学",
+          "level": "自治区级"
+        },
+        {
+          "name": "给排水科学与工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "工程造价",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "外国语学院",
+      "website": "https://wyy.ksu.edu.cn/",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "英语",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "俄语",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "翻译",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "物理与电气工程学院",
+      "website": "https://wdy.ksu.edu.cn/",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "物理学",
+          "code": "070201",
+          "category": "物理学类",
+          "discipline": "理学",
+          "level": "自治区级"
+        },
+        {
+          "name": "电气工程及其自动化",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "能源与动力工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "现代农学院",
+      "website": "http://nxy.ksu.edu.cn",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "设施农业科学与工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "园艺",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "植物保护",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "电子与通信工程学院",
+      "website": "https://dty.ksu.edu.cn/",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "电子信息科学与技术",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "通信工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "信息工程",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "设计学院",
+      "website": "https://sjxy.ksu.edu.cn/",
+      "major_count": 3,
+      "majors": [
+        {
+          "name": "艺术设计学",
+          "code": "130501",
+          "category": "设计学类",
+          "discipline": "艺术学",
+          "level": "国家级"
+        },
+        {
+          "name": "环境设计",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "产品设计",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "建筑学院",
+      "website": "https://jzy.ksu.edu.cn/",
+      "major_count": 2,
+      "majors": [
+        {
+          "name": "建筑学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "城乡规划",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "新闻传播学院",
+      "website": "http://xcy.ksu.edu.cn",
+      "major_count": 2,
+      "majors": [
+        {
+          "name": "广播电视学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "广告学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "旅游学院",
+      "website": "https://lyy.ksu.edu.cn/",
+      "major_count": 2,
+      "majors": [
+        {
+          "name": "酒店管理",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "旅游管理",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "法政学院",
+      "website": "https://fzy.ksu.edu.cn/",
+      "major_count": 2,
+      "majors": [
+        {
+          "name": "法学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "社会工作",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "音乐与舞蹈学院",
+      "website": "https://ysy.ksu.edu.cn/",
+      "major_count": 2,
+      "majors": [
+        {
+          "name": "音乐学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        },
+        {
+          "name": "舞蹈表演",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "美术学院",
+      "website": "https://msy.ksu.edu.cn/",
+      "major_count": 1,
+      "majors": [
+        {
+          "name": "美术学",
+          "code": null,
+          "category": null,
+          "discipline": null,
+          "level": null
+        }
+      ]
+    },
+    {
+      "name": "马克思主义学院",
+      "website": "https://szb.ksu.edu.cn/",
+      "major_count": 1,
+      "majors": [
+        {
+          "name": "思想政治教育",
+          "code": "030503",
+          "category": "法学类",
+          "discipline": "法学",
+          "level": "自治区级"
+        }
+      ]
+    },
+    {
+      "name": "国学院",
+      "website": null,
+      "major_count": 0,
+      "majors": []
+    },
+    {
+      "name": "继续教育学院",
+      "website": "https://cjy.ksu.edu.cn/",
+      "major_count": 0,
+      "majors": []
+    }
+  ]
+}
