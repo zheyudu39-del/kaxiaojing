@@ -258,6 +258,12 @@ export async function initializeDatabase(dbPath?: string): Promise<DatabaseWrapp
     if (count.count === 0) {
         const { seedCompetitions } = require('./seed');
         seedCompetitions(db);
+        // 补充《喀什大学 2027 届推免认定学科竞赛项目目录》中的竞赛。
+        // 必须在 seedColleges 之前执行——后者会依据 competitions 全量构建
+        // 「学院/专业 → 竞赛」映射，晚于此则新竞赛不会被挂到专业上。
+        const { seedTuimianCompetitions } = require('./tuimianCompetitions');
+        const n = seedTuimianCompetitions(db);
+        console.log(`[seed] 已导入推免认定竞赛 ${n} 项`);
     }
     // Seed colleges data if colleges table is empty
     const collegeCount = db.prepare('SELECT COUNT(*) as count FROM colleges').get();

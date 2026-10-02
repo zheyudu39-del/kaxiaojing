@@ -23,9 +23,12 @@ function buildCompetitionKnowledge() {
         const catComps = competitions.filter(c => c.category === cat.category);
         knowledge += `### ${cat.category}（${catComps.length}项）\n`;
         for (const c of catComps) {
-            const regPeriod = c.reg_end_month
-                ? `${monthNames[c.reg_start_month]}-${monthNames[c.reg_end_month]}`
-                : `${monthNames[c.reg_start_month]}`;
+            // reg_start_month 为 0 表示「报名时间待公布」（推免目录未提供报名时间）
+            const regPeriod = !c.reg_start_month
+                ? '待公布'
+                : c.reg_end_month
+                    ? `${monthNames[c.reg_start_month]}-${monthNames[c.reg_end_month]}`
+                    : `${monthNames[c.reg_start_month]}`;
             knowledge += `- **${c.name}**（ID:${c.id}）：${c.description}。参赛对象：${c.target_audience}。形式：${c.format === 'team' ? '团队赛' : '个人赛'}。报名时间：${regPeriod}。费用：${c.fee}。\n`;
             if (c.requirements) {
                 knowledge += `  参赛要求：${c.requirements.replace(/\n/g, '；')}\n`;

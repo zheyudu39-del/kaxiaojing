@@ -55,7 +55,9 @@ CATEGORY_COLLEGE_MAP: dict[str, list[str]] = {
     "农学类": ["现代农学院", "生命与地理科学学院"],
 }
 
-# seedColleges() 的函数体（逻辑不变，仅 categoryCollegeMap 由上面生成）
+# seedColleges() 与 buildCompetitionMappings() 的函数体
+# （逻辑不变，仅 categoryCollegeMap 由上面生成；映射构建已抽成独立函数，
+#   供新增竞赛后重建映射复用）
 FUNC_TEMPLATE = '''
 export function seedColleges(db: DatabaseWrapper): void {{
     // Insert colleges
@@ -86,9 +88,28 @@ export function seedColleges(db: DatabaseWrapper): void {{
     }});
     insertManyMajors(majors);
 
-    // --- Competition-College and Competition-Major mappings ---
+    // 学院/专业写入后，构建「学院-竞赛」「专业-竞赛」映射
+    buildCompetitionMappings(db);
+}}
+
+/**
+ * 依据 competitions 表 + categoryCollegeMap 重建竞赛映射。
+ * 会先清空 college_competitions / major_competitions 再全量重建，
+ * 因此在新增竞赛之后调用即可让新竞赛自动挂到对应学院与专业。
+ */
+export function buildCompetitionMappings(db: DatabaseWrapper): void {{
+    const collegeRows = db.prepare('SELECT id, name FROM colleges').all();
+    const collegeIdMap = new Map<string, number>();
+    for (const row of collegeRows) {{
+        collegeIdMap.set(row.name, row.id);
+    }}
+
     // Category-to-college mapping
     const categoryCollegeMap: Record<string, string[]> = {category_map};
+
+    // 全量重建：先清空旧映射（注意外键顺序）
+    db.exec('DELETE FROM major_competitions');
+    db.exec('DELETE FROM college_competitions');
 
     // Query all competitions grouped by category
     const competitionRows = db.prepare('SELECT id, category FROM competitions').all();

@@ -69,6 +69,21 @@ body {
   height: 30px;
 }
 
+/* 移动端：工具栏控件改为等宽铺满，避免固定 px 宽度导致换行后右侧留大片空白
+   （竞赛列表页在 375px 下曾出现 160+140 挤一行、其余项各自独占一行的问题） */
+@media (max-width: 991px) {
+  .toolbar-row > .ant-select,
+  .toolbar-row > .ant-input-search,
+  .toolbar-row > .ant-input-affix-wrapper,
+  .toolbar-row > .ant-picker {
+    width: 100% !important;
+    flex: 1 1 100%;
+  }
+  .toolbar-row > .ant-btn {
+    flex: 0 0 auto;
+  }
+}
+
 /* ---------- 修复 3：表头文字折行 ----------
    旧版「下载量」被折成两行。表头一律不换行。 */
 .ant-table-thead > tr > th {

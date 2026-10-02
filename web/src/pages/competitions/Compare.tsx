@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { Button, Card, Empty, Select, Space, Table, Tag } from 'antd'
 import { competitionApi } from '@/api/competitions'
 import { PageHeader } from '@/components/common'
+import { useIsMobile } from '@/hooks/useMediaQuery'
 import type { Competition } from '@/types'
 
 export default function Compare() {
+  const isMobile = useIsMobile()
   const [options, setOptions] = useState<Competition[]>([])
   const [ids, setIds] = useState<number[]>([])
   const [data, setData] = useState<Competition[]>([])
@@ -44,11 +46,12 @@ export default function Compare() {
         title="竞赛对比"
         description="最多选择 4 项竞赛并排对比关键信息"
         extra={
-          <Space>
+          /* 移动端（≤991px）改为纵向铺满：固定 minWidth:320 会让「开始对比」被挤出屏幕 */
+          <Space direction={isMobile ? 'vertical' : 'horizontal'} style={{ width: isMobile ? '100%' : undefined }}>
             <Select
               mode="multiple"
               allowClear
-              style={{ minWidth: 320 }}
+              style={isMobile ? { width: '100%' } : { minWidth: 320 }}
               placeholder="选择要对比的竞赛"
               maxCount={4}
               value={ids}
@@ -57,7 +60,13 @@ export default function Compare() {
               showSearch
               options={options.map((c) => ({ label: c.name, value: c.id }))}
             />
-            <Button type="primary" disabled={ids.length < 2} loading={loading} onClick={run}>
+            <Button
+              type="primary"
+              disabled={ids.length < 2}
+              loading={loading}
+              onClick={run}
+              block={isMobile}
+            >
               开始对比
             </Button>
           </Space>
@@ -74,8 +83,10 @@ export default function Compare() {
             rowKey="label"
             pagination={false}
             size="small"
+            /* 移动端多列对比必然超宽，交给表格自身横向滚动，避免撑破页面 */
+            scroll={{ x: 'max-content' }}
             columns={[
-              { title: '对比项', dataIndex: 'label', width: 140 },
+              { title: '对比项', dataIndex: 'label', width: 140, fixed: isMobile ? undefined : ('left' as const) },
               ...data.map((c) => ({
                 title: c.name,
                 dataIndex: String(c.id),

@@ -9,6 +9,8 @@
     "dev": "ts-node --transpile-only src/index.ts",
     "reseed:colleges": "ts-node --transpile-only src/scripts/reseedColleges.ts",
     "reseed:colleges:dry": "ts-node --transpile-only src/scripts/reseedColleges.ts --dry-run",
+    "seed:tuimian": "ts-node --transpile-only src/scripts/addTuimianCompetitions.ts",
+    "seed:tuimian:dry": "ts-node --transpile-only src/scripts/addTuimianCompetitions.ts --dry-run",
     "test": "jest --forceExit --detectOpenHandles",
     "test:watch": "jest --watch --forceExit --detectOpenHandles"
   },

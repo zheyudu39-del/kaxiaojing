@@ -185,7 +185,22 @@ export function seedColleges(db: DatabaseWrapper): void {
     });
     insertManyMajors(majors);
 
-    // --- Competition-College and Competition-Major mappings ---
+    // 学院/专业写入后，构建「学院-竞赛」「专业-竞赛」映射
+    buildCompetitionMappings(db);
+}
+
+/**
+ * 依据 competitions 表 + categoryCollegeMap 重建竞赛映射。
+ * 会先清空 college_competitions / major_competitions 再全量重建，
+ * 因此在新增竞赛之后调用即可让新竞赛自动挂到对应学院与专业。
+ */
+export function buildCompetitionMappings(db: DatabaseWrapper): void {
+    const collegeRows = db.prepare('SELECT id, name FROM colleges').all();
+    const collegeIdMap = new Map<string, number>();
+    for (const row of collegeRows) {
+        collegeIdMap.set(row.name, row.id);
+    }
+
     // Category-to-college mapping
     const categoryCollegeMap: Record<string, string[]> = {
         '计算机类': ['计算机科学与技术学院'],
@@ -200,6 +215,10 @@ export function seedColleges(db: DatabaseWrapper): void {
         '职业技能类': ['土木工程学院', '建筑学院', '交通学院'],
         '农学类': ['现代农学院', '生命与地理科学学院'],
     };
+
+    // 全量重建：先清空旧映射（注意外键顺序）
+    db.exec('DELETE FROM major_competitions');
+    db.exec('DELETE FROM college_competitions');
 
     // Query all competitions grouped by category
     const competitionRows = db.prepare('SELECT id, category FROM competitions').all();
