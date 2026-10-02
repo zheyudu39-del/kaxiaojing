@@ -8,11 +8,10 @@ import {
   MenuOutlined,
   DownOutlined,
   LogoutOutlined,
-  SettingOutlined,
   RobotOutlined,
   CompassOutlined,
 } from '@ant-design/icons'
-import { NAV_ITEMS, PRIMARY_LIMIT } from './navConfig'
+import { filterNav } from './navConfig'
 import { useAuthStore } from '@/stores/auth'
 import { useNotificationCount } from '@/hooks/useNotificationCount'
 import { useIsMobile } from '@/hooks/useMediaQuery'
@@ -34,21 +33,25 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
   const isActive = (path: string) =>
     path === '/dashboard' ? location.pathname === '/dashboard' : location.pathname.startsWith(path)
 
-  const visible = useMemo(
-    () => NAV_ITEMS.filter((i) => i.primary && (!i.auth || token) && (!i.admin || user?.role === 'admin')),
-    [token, user?.role],
+  const authOpts = { token, role: user?.role }
+
+  // 核心模块：顶栏常驻（移动端进「导航」下拉）
+  const coreItems = useMemo(() => filterNav('core', authOpts), [token, user?.role])
+  // 二级入口：并入核心模块的子功能，收进「更多」
+  const secondaryItems = useMemo(() => filterNav('secondary', authOpts), [token, user?.role])
+  // 个人向工具：收进头像下拉，不占导航位
+  const personalItems = useMemo(() => filterNav('personal', authOpts), [token, user?.role])
+
+  // 移动端顶部下拉只放核心 + 二级（个人项已在底部导航和头像菜单里）
+  const mobileNavItems = useMemo(
+    () => [...coreItems, ...secondaryItems],
+    [coreItems, secondaryItems],
   )
 
-  // 超出 PRIMARY_LIMIT 的进「更多」下拉 —— 修复旧版溢出成 "..." 的问题
-  const mainItems = visible.slice(0, PRIMARY_LIMIT)
-  const moreItems = NAV_ITEMS.filter(
-    (i) => !i.primary && (!i.auth || token) && (!i.admin || user?.role === 'admin'),
-  )
-
-  // 移动端：全部导航收进「导航」下拉（底部已有主导航，顶部不再重复展示）
-  const mobileNavItems = NAV_ITEMS.filter(
-    (i) => !i.tab && (!i.auth || token) && (!i.admin || user?.role === 'admin'),
-  )
+  // 头像下拉里的个人工具链接（排除「个人中心」本身，它在菜单首项单独渲染）
+  const personalMenuItems = personalItems
+    .filter((i) => i.key !== 'profile')
+    .map((i) => ({ key: i.key, icon: i.icon, label: <Link to={i.path}>{i.label}</Link> }))
 
   return (
     <header
@@ -97,7 +100,7 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
         </div>
       ) : (
         <nav style={{ display: 'flex', alignItems: 'center', gap: 4, flex: 1, overflow: 'hidden' }}>
-          {mainItems.map((item) => (
+          {coreItems.map((item) => (
             <Link
               key={item.key}
               to={item.path}
@@ -114,28 +117,30 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
             </Link>
           ))}
 
-          <Dropdown
-            menu={{
-              items: moreItems.map((i) => ({
-                key: i.key,
-                icon: i.icon,
-                label: <Link to={i.path}>{i.label}</Link>,
-              })),
-            }}
-          >
-            <span
-              style={{
-                padding: '6px 12px',
-                borderRadius: 6,
-                fontSize: 14,
-                cursor: 'pointer',
-                color: 'rgba(255,255,255,.72)',
-                whiteSpace: 'nowrap',
+          {secondaryItems.length > 0 && (
+            <Dropdown
+              menu={{
+                items: secondaryItems.map((i) => ({
+                  key: i.key,
+                  icon: i.icon,
+                  label: <Link to={i.path}>{i.label}</Link>,
+                })),
               }}
             >
-              更多 <DownOutlined style={{ fontSize: 10 }} />
-            </span>
-          </Dropdown>
+              <span
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: 6,
+                  fontSize: 14,
+                  cursor: 'pointer',
+                  color: 'rgba(255,255,255,.72)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                更多 <DownOutlined style={{ fontSize: 10 }} />
+              </span>
+            </Dropdown>
+          )}
         </nav>
       )}
 
@@ -193,10 +198,12 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
 
         {token ? (
           <Dropdown
+            placement="bottomRight"
             menu={{
               items: [
                 { key: 'profile', icon: <UserOutlined />, label: <Link to="/profile">个人中心</Link> },
-                { key: 'settings', icon: <SettingOutlined />, label: <Link to="/settings">设置</Link> },
+                { type: 'divider' },
+                ...personalMenuItems,
                 { type: 'divider' },
                 {
                   key: 'logout',
@@ -207,6 +214,7 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
                   },
                 },
               ],
+              style: { maxHeight: 420, overflowY: 'auto' },
             }}
           >
             <Space style={{ cursor: 'pointer', color: '#fff' }}>

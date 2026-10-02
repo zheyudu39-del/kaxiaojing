@@ -11,6 +11,7 @@
     "reseed:colleges:dry": "ts-node --transpile-only src/scripts/reseedColleges.ts --dry-run",
     "seed:tuimian": "ts-node --transpile-only src/scripts/addTuimianCompetitions.ts",
     "seed:tuimian:dry": "ts-node --transpile-only src/scripts/addTuimianCompetitions.ts --dry-run",
+    "cleanup:test-users": "ts-node --transpile-only src/scripts/cleanupTestUsers.ts",
     "test": "jest --forceExit --detectOpenHandles",
     "test:watch": "jest --watch --forceExit --detectOpenHandles"
   },
