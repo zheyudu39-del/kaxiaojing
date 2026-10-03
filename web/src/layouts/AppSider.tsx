@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Collapse, Empty, Input, Spin, Tree, Typography } from 'antd'
-import { RobotOutlined, SearchOutlined } from '@ant-design/icons'
+import { Empty, Input, Spin, Tree, Typography } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 import { collegeApi } from '@/api/competitions'
 import type { College, Major } from '@/types'
 
 const { Text } = Typography
 
 /**
- * 桌面端左侧栏。
- * 修复旧版问题：AI 助手面板固定占 345px，把学院树挤到只剩 230px。
- * 这里改为可折叠的 Collapse，默认收起，学院树占满可用高度。
+ * 桌面端左侧栏：学院/专业树，点击可直接筛竞赛。
+ * （原 AI 助手面板已随模块精简移除，学院树占满整个侧栏高度。）
  */
 export default function AppSider() {
   const navigate = useNavigate()
@@ -92,37 +91,6 @@ export default function AppSider() {
           />
         )}
       </div>
-
-      <Collapse
-        ghost
-        size="small"
-        style={{ borderTop: '1px solid #f0f0f0' }}
-        items={[
-          {
-            key: 'ai',
-            label: (
-              <span style={{ fontSize: 13 }}>
-                <RobotOutlined /> 喀小竞 AI 助手
-              </span>
-            ),
-            children: (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {['推荐适合我的竞赛', '现在有哪些竞赛在报名？', '数学建模怎么备赛？', '零基础如何入门竞赛？'].map(
-                  (q) => (
-                    <a
-                      key={q}
-                      onClick={() => navigate(`/ai-assistant?q=${encodeURIComponent(q)}`)}
-                      style={{ fontSize: 12 }}
-                    >
-                      {q}
-                    </a>
-                  ),
-                )}
-              </div>
-            ),
-          },
-        ]}
-      />
     </div>
   )
 }
