@@ -62,6 +62,7 @@ export const NAV_ITEMS: NavItem[] = [
   // ---------- 二级入口（并入核心模块，收进「更多」） ----------
   { key: 'compare', label: '竞赛对比', path: '/competitions/compare', icon: <SwapOutlined />, group: 'secondary' },
   { key: 'qa', label: '问答', path: '/qa', icon: <BulbOutlined />, group: 'secondary' },
+  { key: 'lobby', label: '交流大厅', path: '/lobby', icon: <MessageOutlined />, group: 'secondary' },
 
   // ---------- 个人中心（收进头像下拉，不占导航位） ----------
   { key: 'my-teams', label: '我的队伍', path: '/my-teams', icon: <TeamOutlined />, group: 'personal', auth: true, tab: true },

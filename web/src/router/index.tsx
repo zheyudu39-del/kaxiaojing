@@ -49,6 +49,7 @@ const Ranking = lazy(() => import('@/pages/ranking/Ranking'))
 
 const Forum = lazy(() => import('@/pages/forum/Forum'))
 const PostDetail = lazy(() => import('@/pages/forum/PostDetail'))
+const Lobby = lazy(() => import('@/pages/forum/Lobby'))
 const Qa = lazy(() => import('@/pages/qa/Qa'))
 const QaDetail = lazy(() => import('@/pages/qa/QaDetail'))
 
@@ -100,6 +101,7 @@ export const router = createBrowserRouter([
       { path: 'ranking', element: wrap(<Ranking />) },
       { path: 'forum', element: wrap(<Forum />) },
       { path: 'forum/:id', element: wrap(<PostDetail />) },
+      { path: 'lobby', element: wrap(<Lobby />) },
       { path: 'qa', element: wrap(<Qa />) },
       { path: 'qa/:id', element: wrap(<QaDetail />) },
       { path: 'resources', element: wrap(<Resources />) },

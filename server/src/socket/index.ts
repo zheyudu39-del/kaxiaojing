@@ -5,6 +5,7 @@
 import { Server } from 'socket.io';
 import { authService } from '../services/authService';
 import { chatService } from '../services/chatService';
+import { lobbyService } from '../services/lobbyService';
 import { getCorsOptions } from '../config/cors';
 
 // ===== 类型定义（自 .d.ts 还原）=====
@@ -79,6 +80,27 @@ export function initializeSocket(httpServer: HttpServer): Server {
             try {
                 const message = chatService.sendMessage(teamId, userId, content);
                 io.to(`team-${teamId}`).emit('new-message', message);
+            }
+            catch (err) {
+                socket.emit('error', { message: err.message || '发送消息失败' });
+            }
+        });
+        // === 交流大厅 ===
+        socket.on('join-lobby', () => {
+            socket.join('lobby');
+        });
+        socket.on('leave-lobby', () => {
+            socket.leave('lobby');
+        });
+        socket.on('send-lobby-message', (data) => {
+            const { content, msgType, competitionId } = data;
+            if (!content || !content.trim()) {
+                socket.emit('error', { message: '消息内容不能为空' });
+                return;
+            }
+            try {
+                const message = lobbyService.sendMessage(userId, content.trim(), msgType || 'chat', competitionId);
+                io.to('lobby').emit('new-lobby-message', message);
             }
             catch (err) {
                 socket.emit('error', { message: err.message || '发送消息失败' });
