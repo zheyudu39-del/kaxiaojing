@@ -79,11 +79,16 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
         {!isMobile && <span style={{ fontSize: 16, fontWeight: 500, whiteSpace: 'nowrap' }}>喀小竞</span>}
       </Link>
 
-      {/* 移动端：导航收进下拉，避免旧版顶部导航横向溢出 */}
+      {/* 移动端：导航收进下拉，避免旧版顶部导航横向溢出。
+          下拉菜单用深色样式（.mobile-nav-menu），与顶部导航栏连成一体。 */}
       {isMobile ? (
         <div style={{ flex: 1, minWidth: 0 }}>
           <Dropdown
             placement="bottomLeft"
+            overlayClassName="mobile-nav-menu"
+            /* 默认菜单顶边落在 y=52（导航栏内），下移 12px 贴住导航栏底边 y=64，
+               配合 .mobile-nav-menu 的深色样式看起来就是导航栏向下展开的一块 */
+            align={{ offset: [0, 16] }}
             menu={{
               items: mobileNavItems.map((i) => ({
                 key: i.key,
