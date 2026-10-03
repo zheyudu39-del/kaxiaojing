@@ -291,18 +291,6 @@ export async function initializeDatabase(dbPath?: string): Promise<DatabaseWrapp
     }
     // Fix seeded resources that were inserted without review_status='approved'
     db.prepare("UPDATE resources SET review_status = 'approved' WHERE is_external = 1 AND review_status = 'pending'").run();
-    // Seed quiz data if quizzes table is empty
-    const quizCount = db.prepare('SELECT COUNT(*) as count FROM quizzes').get();
-    if (quizCount.count === 0) {
-        const { seedQuizData } = require('./quizSeed');
-        seedQuizData(db);
-    }
-    // Seed mentor data if mentors table is empty (requires users to exist)
-    const mentorCount = db.prepare('SELECT COUNT(*) as count FROM mentors').get();
-    if (mentorCount.count === 0) {
-        const { seedMentorData } = require('./mentorSeed');
-        seedMentorData(db);
-    }
     // Ensure the first non-system user has admin role
     db.prepare("UPDATE users SET role = 'admin' WHERE id = (SELECT MIN(id) FROM users WHERE id > 1)").run();
     return db;

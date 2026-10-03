@@ -7,9 +7,7 @@ import {
   TeamOutlined,
   MessageOutlined,
   FileTextOutlined,
-  AppstoreOutlined,
   ReadOutlined,
-  RobotOutlined,
   SwapOutlined,
   BulbOutlined,
   UsergroupAddOutlined,
@@ -19,7 +17,6 @@ import {
   StarOutlined,
   MedicineBoxOutlined,
   NotificationOutlined,
-  FundOutlined,
   SmileOutlined,
   CheckSquareOutlined,
   BookOutlined,
@@ -65,9 +62,6 @@ export const NAV_ITEMS: NavItem[] = [
   // ---------- 二级入口（并入核心模块，收进「更多」） ----------
   { key: 'compare', label: '竞赛对比', path: '/competitions/compare', icon: <SwapOutlined />, group: 'secondary' },
   { key: 'qa', label: '问答', path: '/qa', icon: <BulbOutlined />, group: 'secondary' },
-  { key: 'lobby', label: '交流大厅', path: '/lobby', icon: <MessageOutlined />, group: 'secondary' },
-  { key: 'showcases', label: '作品展示', path: '/showcases', icon: <AppstoreOutlined />, group: 'secondary' },
-  { key: 'ai-assistant', label: 'AI 助手', path: '/ai-assistant', icon: <RobotOutlined />, group: 'secondary', auth: true },
 
   // ---------- 个人中心（收进头像下拉，不占导航位） ----------
   { key: 'my-teams', label: '我的队伍', path: '/my-teams', icon: <TeamOutlined />, group: 'personal', auth: true, tab: true },
@@ -78,10 +72,7 @@ export const NAV_ITEMS: NavItem[] = [
   { key: 'notebook', label: '学习笔记', path: '/notebook', icon: <BookOutlined />, group: 'personal', auth: true },
   { key: 'prep-plan', label: '备赛计划', path: '/prep-plan', icon: <ScheduleOutlined />, group: 'personal', auth: true },
   { key: 'award-certs', label: '获奖证书', path: '/award-certs', icon: <TrophyOutlined />, group: 'personal', auth: true },
-  { key: 'timeline', label: '成长轨迹', path: '/timeline', icon: <FundOutlined />, group: 'personal', auth: true },
-  { key: 'badges', label: '成就徽章', path: '/badges', icon: <StarOutlined />, group: 'personal', auth: true },
   { key: 'favorites', label: '我的收藏', path: '/favorites', icon: <StarOutlined />, group: 'personal', auth: true },
-  { key: 'my-report', label: '我的报告', path: '/my-report', icon: <FundOutlined />, group: 'personal', auth: true },
   { key: 'messages', label: '私信', path: '/messages', icon: <MessageOutlined />, group: 'personal', auth: true },
   { key: 'notifications', label: '通知', path: '/notifications', icon: <BellOutlined />, group: 'personal', auth: true },
   { key: 'feedback', label: '意见反馈', path: '/feedback', icon: <MedicineBoxOutlined />, group: 'personal', auth: true },

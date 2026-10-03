@@ -46,23 +46,15 @@ const CompetitionDetail = lazy(() => import('@/pages/competitions/CompetitionDet
 const CompetitionCompare = lazy(() => import('@/pages/competitions/Compare'))
 const Calendar = lazy(() => import('@/pages/competitions/Calendar'))
 const Ranking = lazy(() => import('@/pages/ranking/Ranking'))
-const Statistics = lazy(() => import('@/pages/statistics/Statistics'))
-const DataDashboard = lazy(() => import('@/pages/statistics/DataDashboard'))
 
 const Forum = lazy(() => import('@/pages/forum/Forum'))
 const PostDetail = lazy(() => import('@/pages/forum/PostDetail'))
-const Lobby = lazy(() => import('@/pages/forum/Lobby'))
 const Qa = lazy(() => import('@/pages/qa/Qa'))
 const QaDetail = lazy(() => import('@/pages/qa/QaDetail'))
-const Showcases = lazy(() => import('@/pages/showcases/Showcases'))
 
 const Resources = lazy(() => import('@/pages/resources/Resources'))
 const Recruitment = lazy(() => import('@/pages/recruitment/Recruitment'))
-const Certificates = lazy(() => import('@/pages/certificates/Certificates'))
 const AwardCerts = lazy(() => import('@/pages/certificates/AwardCerts'))
-const Mentors = lazy(() => import('@/pages/mentors/Mentors'))
-const Quiz = lazy(() => import('@/pages/quiz/Quiz'))
-const QuizDetail = lazy(() => import('@/pages/quiz/QuizDetail'))
 
 const StudyGroups = lazy(() => import('@/pages/study/StudyGroups'))
 const StudyGroupDetail = lazy(() => import('@/pages/study/StudyGroupDetail'))
@@ -83,12 +75,8 @@ const Profile = lazy(() => import('@/pages/user/Profile'))
 const UserProfile = lazy(() => import('@/pages/user/UserProfile'))
 const Favorites = lazy(() => import('@/pages/user/Favorites'))
 const Settings = lazy(() => import('@/pages/user/Settings'))
-const Timeline = lazy(() => import('@/pages/user/Timeline'))
-const Badges = lazy(() => import('@/pages/user/Badges'))
-const MyReport = lazy(() => import('@/pages/user/MyReport'))
 const Feedback = lazy(() => import('@/pages/user/Feedback'))
 
-const AiAssistant = lazy(() => import('@/pages/ai/AiAssistant'))
 const Admin = lazy(() => import('@/pages/admin/Admin'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
@@ -110,22 +98,14 @@ export const router = createBrowserRouter([
       { path: 'competitions/:id', element: wrap(<CompetitionDetail />) },
       { path: 'calendar', element: wrap(<Calendar />) },
       { path: 'ranking', element: wrap(<Ranking />) },
-      { path: 'statistics', element: wrap(<Statistics />) },
-      { path: 'data-dashboard', element: wrap(<DataDashboard />) },
       { path: 'forum', element: wrap(<Forum />) },
       { path: 'forum/:id', element: wrap(<PostDetail />) },
-      { path: 'lobby', element: wrap(<Lobby />) },
       { path: 'qa', element: wrap(<Qa />) },
       { path: 'qa/:id', element: wrap(<QaDetail />) },
-      { path: 'showcases', element: wrap(<Showcases />) },
       { path: 'resources', element: wrap(<Resources />) },
       { path: 'recruitment', element: wrap(<Recruitment />) },
-      { path: 'certificates', element: wrap(<Certificates />) },
-      { path: 'mentors', element: wrap(<Mentors />) },
-      { path: 'quiz', element: wrap(<Quiz />) },
       { path: 'study-groups', element: wrap(<StudyGroups />) },
       { path: 'study-groups/:id', element: wrap(<StudyGroupDetail />) },
-      { path: 'timeline', element: wrap(<Timeline />) },
       { path: 'users/:id', element: wrap(<UserProfile />) },
 
       // ---- 需登录 ----
@@ -134,11 +114,8 @@ export const router = createBrowserRouter([
       { path: 'messages', element: <RequireAuth>{wrap(<Messages />)}</RequireAuth> },
       { path: 'notifications', element: <RequireAuth>{wrap(<Notifications />)}</RequireAuth> },
       { path: 'settings', element: <RequireAuth>{wrap(<Settings />)}</RequireAuth> },
-      { path: 'badges', element: <RequireAuth>{wrap(<Badges />)}</RequireAuth> },
-      { path: 'my-report', element: <RequireAuth>{wrap(<MyReport />)}</RequireAuth> },
       { path: 'feedback', element: <RequireAuth>{wrap(<Feedback />)}</RequireAuth> },
       { path: 'award-certs', element: <RequireAuth>{wrap(<AwardCerts />)}</RequireAuth> },
-      { path: 'ai-assistant', element: <RequireAuth>{wrap(<AiAssistant />)}</RequireAuth> },
 
       { path: 'my-teams', element: <RequireAuth>{wrap(<Teams />)}</RequireAuth> },
       { path: 'teams/:id', element: <RequireAuth>{wrap(<TeamDetail />)}</RequireAuth> },
@@ -150,7 +127,6 @@ export const router = createBrowserRouter([
       { path: 'study-buddy', element: <RequireAuth>{wrap(<StudyBuddy />)}</RequireAuth> },
       { path: 'notebook', element: <RequireAuth>{wrap(<Notebook />)}</RequireAuth> },
       { path: 'prep-plan', element: <RequireAuth>{wrap(<PrepPlan />)}</RequireAuth> },
-      { path: 'quiz/:id', element: <RequireAuth>{wrap(<QuizDetail />)}</RequireAuth> },
 
       // ---- 管理员 ----
       { path: 'admin', element: <RequireAdmin>{wrap(<Admin />)}</RequireAdmin> },

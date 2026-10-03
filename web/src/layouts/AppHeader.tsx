@@ -8,7 +8,6 @@ import {
   MenuOutlined,
   DownOutlined,
   LogoutOutlined,
-  RobotOutlined,
   CompassOutlined,
 } from '@ant-design/icons'
 import { filterNav } from './navConfig'
@@ -178,14 +177,6 @@ export default function AppHeader({ onToggleSider, onSearch }: Props) {
             style={{ width: 200 }}
             onPressEnter={(e) => onSearch?.((e.target as HTMLInputElement).value)}
           />
-        )}
-
-        {!isMobile && (
-          <Tooltip title="AI 助手">
-            <Link to="/ai-assistant" style={{ color: '#fff' }}>
-              <RobotOutlined style={{ fontSize: 18 }} />
-            </Link>
-          </Tooltip>
         )}
 
         <Tooltip title="通知">

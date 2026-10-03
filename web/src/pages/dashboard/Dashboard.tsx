@@ -9,14 +9,14 @@ import type { Competition } from '@/types'
 const { Title, Text } = Typography
 
 const QUICK_ENTRIES = [
-  { label: '交流大厅', path: '/lobby' },
+  { label: '竞赛库', path: '/competitions' },
+  { label: '竞赛日历', path: '/calendar' },
+  { label: '组队招募', path: '/recruitment' },
   { label: '经验分享', path: '/forum' },
-  { label: '知识测验', path: '/quiz' },
+  { label: '问答', path: '/qa' },
   { label: '排行榜', path: '/ranking' },
-  { label: '导师指导', path: '/mentors' },
   { label: '资料库', path: '/resources' },
   { label: '组队匹配', path: '/team-match' },
-  { label: '证书考取', path: '/certificates' },
 ]
 
 export default function Dashboard() {
