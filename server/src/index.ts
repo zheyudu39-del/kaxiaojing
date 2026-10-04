@@ -11,6 +11,15 @@ import { loadEnvConfig } from './config/env';
 
 const env = loadEnvConfig();
 const PORT = env.PORT;
+// 兜底：任何未捕获异常 / 未处理的 Promise 拒绝都不应该让整个服务下线。
+// 此前没有这两个处理器，socket 层一个参数类型错误（对象被当作 SQL 绑定值）
+// 就能把 Node 进程直接打挂——前端打开队伍聊天页即可触发。
+process.on('uncaughtException', (err) => {
+    console.error('[uncaughtException] 已拦截，服务继续运行:', err && (err as any).stack ? (err as any).stack : err);
+});
+process.on('unhandledRejection', (reason) => {
+    console.error('[unhandledRejection] 已拦截，服务继续运行:', reason && (reason as any).stack ? (reason as any).stack : reason);
+});
 async function main() {
     // Initialize database and seed data
     await initializeDatabase(env.DB_PATH);

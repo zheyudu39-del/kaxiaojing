@@ -109,7 +109,12 @@ class ReviewService {
         const unionSql = subQueries.join(' UNION ALL ');
         const countSql = `SELECT COUNT(*) as count FROM (${unionSql})`;
         const totalResult = db.prepare(countSql).get({ status });
-        const dataSql = `${unionSql} ORDER BY created_at DESC LIMIT @limit OFFSET @offset`;
+        // 必须再包一层 SELECT *：按单类型筛选时 UNION 只剩一个子查询，
+        // 此时 ORDER BY created_at 会直接作用在带 JOIN 的查询上，
+        // 而 awards / users / competitions 都有 created_at 列 →
+        // sql.js 报 "ambiguous column name: created_at" 并返回 500。
+        // 包成派生表后 ORDER BY 只面对输出列，不再歧义。
+        const dataSql = `SELECT * FROM (${unionSql}) ORDER BY created_at DESC LIMIT @limit OFFSET @offset`;
         const items = db.prepare(dataSql).all({ status, limit: params.pageSize, offset });
         return { items, total: totalResult.count };
     }

@@ -22,7 +22,7 @@ export default function Admin() {
   const [stats, setStats] = useState<any>({})
   const [users, setUsers] = useState<any[]>([])
   const [reviews, setReviews] = useState<any[]>([])
-  const [reviewType, setReviewType] = useState('posts')
+  const [reviewType, setReviewType] = useState('award')
   const [loading, setLoading] = useState(true)
   const [detail, setDetail] = useState<any>(null)
 
@@ -123,11 +123,10 @@ export default function Admin() {
                       loadReviews(v)
                     }}
                     options={[
-                      { label: '帖子', value: 'posts' },
-                      { label: '资料', value: 'resources' },
-                      { label: '招募', value: 'recruitments' },
-                      { label: '获奖', value: 'awards' },
-                      { label: '证书计划', value: 'cert_study_plans' },
+                      { label: '获奖认证', value: 'award' },
+                      { label: '证书认证', value: 'certificate' },
+                      { label: '头像审核', value: 'avatar' },
+                      { label: '教师认证', value: 'teacher_cert' },
                     ]}
                   />
                 }
@@ -146,20 +145,25 @@ export default function Admin() {
                         dataIndex: 'title',
                         ellipsis: true,
                         render: (t: string, r: any) => (
-                          <a onClick={() => setDetail(r)}>{t || r.content?.slice(0, 40) || `#${r.id}`}</a>
+                          <a onClick={() => setDetail(r)}>{t || r.content?.slice(0, 40) || `#${r.content_id}`}</a>
                         ),
                       },
-                      { title: '提交人', dataIndex: 'username', width: 110, render: (v: string, r: any) => v || `#${r.user_id}` },
+                      {
+                        title: '提交人',
+                        dataIndex: 'submitter_name',
+                        width: 110,
+                        render: (v: string, r: any) => v || `#${r.submitter_id}`,
+                      },
                       { title: '提交时间', dataIndex: 'created_at', width: 170 },
                       {
                         title: '操作',
                         width: 140,
                         render: (_: any, r: any) => (
                           <Space size={4}>
-                            <Button size="small" type="primary" icon={<CheckOutlined />} onClick={() => approve(reviewType, r.id)}>
+                            <Button size="small" type="primary" icon={<CheckOutlined />} onClick={() => approve(reviewType, r.content_id)}>
                               通过
                             </Button>
-                            <Button size="small" danger icon={<CloseOutlined />} onClick={() => reject(reviewType, r.id)}>
+                            <Button size="small" danger icon={<CloseOutlined />} onClick={() => reject(reviewType, r.content_id)}>
                               拒绝
                             </Button>
                           </Space>
@@ -227,10 +231,10 @@ export default function Admin() {
         footer={
           detail && (
             <Space>
-              <Button danger onClick={() => { reject(reviewType, detail.id); setDetail(null) }}>
+              <Button danger onClick={() => { reject(reviewType, detail.content_id); setDetail(null) }}>
                 拒绝
               </Button>
-              <Button type="primary" onClick={() => { approve(reviewType, detail.id); setDetail(null) }}>
+              <Button type="primary" onClick={() => { approve(reviewType, detail.content_id); setDetail(null) }}>
                 通过
               </Button>
             </Space>
@@ -241,7 +245,7 @@ export default function Admin() {
         {detail && (
           <Descriptions column={1} size="small">
             <Descriptions.Item label="标题">{detail.title || '-'}</Descriptions.Item>
-            <Descriptions.Item label="提交人">{detail.username || `#${detail.user_id}`}</Descriptions.Item>
+            <Descriptions.Item label="提交人">{detail.submitter_name || `#${detail.submitter_id}`}</Descriptions.Item>
             <Descriptions.Item label="时间">{detail.created_at}</Descriptions.Item>
             <Descriptions.Item label="内容">
               <Paragraph style={{ whiteSpace: 'pre-wrap', marginBottom: 0 }}>

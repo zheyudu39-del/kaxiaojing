@@ -15,6 +15,19 @@ let io = null;
 // In-memory online user tracking: userId -> Set of socketIds
 const onlineUsers = new Map();
 /**
+ * 从 socket 载荷里安全取出 teamId。
+ *
+ * 客户端发的是对象 `{ teamId: N }`，而早期处理器把它当数字直接传进 SQL 绑定，
+ * sql.js 遇到对象参数会抛 "tried to bind a value of an unknown type"，
+ * 该异常未被捕获时**会直接崩掉整个 Node 进程**（前端一打开队伍聊天页就能触发）。
+ * 这里统一兼容「数字」与「{teamId}」两种形态，并强制转成正整数。
+ */
+function parseTeamId(payload: any): number | null {
+    const raw = payload && typeof payload === 'object' ? payload.teamId : payload;
+    const id = Number(raw);
+    return Number.isInteger(id) && id > 0 ? id : null;
+}
+/**
  * Check if a user is currently online (has at least one active socket connection).
  */
 export function isUserOnline(userId: number): boolean {
@@ -61,18 +74,34 @@ export function initializeSocket(httpServer: HttpServer): Server {
         // 加入个人房间，用于私信推送
         socket.join(`user-${userId}`);
         socket.emit('connection-status', 'connected');
-        socket.on('join-team-chat', (teamId) => {
-            if (!chatService.isTeamMember(teamId, userId)) {
-                socket.emit('error', { message: '您不是该队伍成员' });
+        socket.on('join-team-chat', (payload) => {
+            const teamId = parseTeamId(payload);
+            if (!teamId) {
+                socket.emit('error', { message: '缺少有效的 teamId' });
                 return;
             }
-            socket.join(`team-${teamId}`);
+            try {
+                if (!chatService.isTeamMember(teamId, userId)) {
+                    socket.emit('error', { message: '您不是该队伍成员' });
+                    return;
+                }
+                socket.join(`team-${teamId}`);
+            }
+            catch (err) {
+                socket.emit('error', { message: err.message || '加入队伍聊天失败' });
+            }
         });
-        socket.on('leave-team-chat', (teamId) => {
+        socket.on('leave-team-chat', (payload) => {
+            const teamId = parseTeamId(payload);
+            if (!teamId) {
+                socket.emit('error', { message: '缺少有效的 teamId' });
+                return;
+            }
             socket.leave(`team-${teamId}`);
         });
-        socket.on('send-message', (data) => {
-            const { teamId, content } = data;
+        socket.on('send-message', (payload) => {
+            const teamId = parseTeamId(payload);
+            const content = payload && typeof payload === 'object' ? payload.content : undefined;
             if (!teamId || !content) {
                 socket.emit('error', { message: '缺少必填字段' });
                 return;

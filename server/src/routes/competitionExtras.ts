@@ -277,6 +277,12 @@ router.put('/:id/stages/:stageId', authMiddleware, requireTeacherOrAdmin, (req, 
             return;
         }
         const { stage_name, start_month, end_month, description, sort_order } = req.body;
+        // 与 POST /:id/stages 保持一致：这三列在表里是 NOT NULL，
+        // 不校验会让缺失字段一路走到 UPDATE，触发约束错误变成 500
+        if (!stage_name || !start_month || !end_month) {
+            res.status(400).json({ error: '阶段名称、开始月份、结束月份为必填项' });
+            return;
+        }
         db.prepare('UPDATE competition_stages SET stage_name = @stageName, start_month = @startMonth, end_month = @endMonth, description = @desc, sort_order = @sortOrder WHERE id = @id').run({ id: stageId, stageName: stage_name, startMonth: start_month, endMonth: end_month, desc: description || '', sortOrder: sort_order || 0 });
         res.json({ message: '阶段更新成功' });
     }

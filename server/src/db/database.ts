@@ -212,6 +212,17 @@ export class StatementWrapper {
         if (!Array.isArray(params)) {
             const converted = {};
             for (const [key, value] of Object.entries(params)) {
+                // sql.js 遇到对象/函数参数只会抛一个**没有堆栈的字符串**
+                // （"tried to bind a value of an unknown type"），
+                // 未捕获时会直接崩掉整个进程且极难定位。
+                // 这里提前抛出带堆栈的正常 Error，让它能被上层 try/catch 接住。
+                const t = typeof value;
+                if (value !== null && (t === 'object' || t === 'function')) {
+                    throw new Error(
+                        `SQL 参数类型不合法：${key} 收到 ${t}（${JSON.stringify(value).slice(0, 80)}），` +
+                        `SQL: ${String(this.sql).replace(/\s+/g, ' ').slice(0, 120)}`,
+                    );
+                }
                 const paramKey = key.startsWith('@') || key.startsWith('$') || key.startsWith(':')
                     ? key
                     : `@${key}`;

@@ -44,7 +44,13 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: process.env.VITE_API_TARGET || 'http://localhost:5000',
-        changeOrigin: true,
+        // 必须保持 false（默认）——不要改成 true。
+        // 后端的 CSRF 中间件用「Origin 的 host === 请求的 Host」判定同源；
+        // 代理若改写 Host（changeOrigin: true），后端看到的 Host 变成 5000，
+        // 与浏览器的 Origin(5173) 不一致 → 所有非 GET 请求被判为跨域而 403。
+        // 而 CSRF 对跨域还要求 X-Requested-With 头（前端从不设置），
+        // 所以改写 Host 会让本地开发的写操作（发帖/关注/点赞等）全部失败。
+        changeOrigin: false,
       },
       '/uploads': {
         target: process.env.VITE_API_TARGET || 'http://localhost:5000',

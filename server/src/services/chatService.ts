@@ -25,6 +25,14 @@ export class ChatError extends Error {
 export class ChatService {
     sendMessage(teamId: number, userId: number, content: string): ChatMessage {
         const db = getDb();
+        // 防御：入参可能来自 socket 载荷，历史上出现过对象形态（{teamId:N}），
+        // 直接绑定给 sql.js 会抛错并崩进程，这里强制收敛成基本类型
+        teamId = Number(teamId);
+        userId = Number(userId);
+        content = String(content ?? '');
+        if (!Number.isInteger(teamId) || !Number.isInteger(userId)) {
+            throw new ChatError('参数不合法', 400);
+        }
         if (!this.isTeamMember(teamId, userId)) {
             throw new ChatError('您不是该队伍成员', 403);
         }
@@ -60,7 +68,13 @@ export class ChatService {
     }
     isTeamMember(teamId: number, userId: number): boolean {
         const db = getDb();
-        const result = db.prepare('SELECT id FROM team_members WHERE team_id = @teamId AND user_id = @userId').get({ teamId, userId });
+        // 同上：收敛类型，避免对象被当作绑定参数
+        const tid = Number(teamId);
+        const uid = Number(userId);
+        if (!Number.isInteger(tid) || !Number.isInteger(uid)) {
+            return false;
+        }
+        const result = db.prepare('SELECT id FROM team_members WHERE team_id = @teamId AND user_id = @userId').get({ teamId: tid, userId: uid });
         return !!result;
     }
 }

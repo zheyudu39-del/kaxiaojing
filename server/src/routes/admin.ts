@@ -175,11 +175,37 @@ router.get('/export', (_req, res, next) => {
     }
 });
 // --- 审核管理路由 ---
-const VALID_CONTENT_TYPES = ['award', 'certificate', 'avatar', 'teacher_cert', 'post', 'resource', 'recruitment'];
+// 真正可审核的内容类型 —— 必须与 reviewService 的 TABLE_MAP + avatar 特例保持一致。
+// 曾多写了 post/resource/recruitment：这三类内容创建时直接写入 review_status='approved'
+// （见 postService/resourceService/recruitmentService），从不进入审核队列，
+// 列在合法类型里只会让前端下拉给出永远 400 的选项。
+const VALID_CONTENT_TYPES = ['award', 'certificate', 'avatar', 'teacher_cert'];
+/**
+ * 内容类型别名归一化。
+ * service 层用的是**单数**（award / certificate / teacher_cert），
+ * 而前端下拉历史版本用的是**复数**，cert_study_plans 更是另一个词。
+ * 两边不一致会让「列表筛选」静默失效、「通过/拒绝」按钮 400，
+ * 因此在入口统一归一化，兼容新旧两种写法。
+ */
+const CONTENT_TYPE_ALIASES: Record<string, string> = {
+    awards: 'award',
+    certificates: 'certificate',
+    teacher_certs: 'teacher_cert',
+    cert_study_plans: 'certificate',
+    certPlans: 'certificate',
+};
+function normalizeContentType(value: unknown): string | undefined {
+    if (typeof value !== 'string' || !value)
+        return undefined;
+    return CONTENT_TYPE_ALIASES[value] || value;
+}
 // GET /api/admin/reviews — 审核列表
 router.get('/reviews', (req, res, next) => {
     try {
-        const content_type = req.query.content_type;
+        // 兼容两种参数名：前端（api/stats.ts 的 adminApi.reviews）发的是 type，
+        // 而本路由历史实现只认 content_type，导致筛选被静默忽略、
+        // 列表混入其它类型的内容，进而让「通过」按钮带着错误的 type 去审核而 400。
+        const content_type = normalizeContentType(req.query.content_type || req.query.type);
         if (content_type && !VALID_CONTENT_TYPES.includes(content_type)) {
             res.status(400).json({ error: '无效的内容类型' });
             return;
@@ -207,7 +233,7 @@ router.get('/reviews/stats', (_req, res, next) => {
 // GET /api/admin/reviews/:type/:id — 审核详情
 router.get('/reviews/:type/:id', (req, res, next) => {
     try {
-        const type = req.params.type;
+        const type = normalizeContentType(req.params.type);
         const id = req.params.id;
         if (!VALID_CONTENT_TYPES.includes(type)) {
             res.status(400).json({ error: '无效的内容类型' });
@@ -227,7 +253,7 @@ router.get('/reviews/:type/:id', (req, res, next) => {
 // PUT /api/admin/reviews/:type/:id/approve — 通过审核
 router.put('/reviews/:type/:id/approve', (req, res, next) => {
     try {
-        const type = req.params.type;
+        const type = normalizeContentType(req.params.type);
         const id = req.params.id;
         if (!VALID_CONTENT_TYPES.includes(type)) {
             res.status(400).json({ error: '无效的内容类型' });
@@ -255,7 +281,7 @@ router.put('/reviews/:type/:id/approve', (req, res, next) => {
 // PUT /api/admin/reviews/:type/:id/reject — 拒绝审核
 router.put('/reviews/:type/:id/reject', validate({ body: rejectReviewSchema }), (req, res, next) => {
     try {
-        const type = req.params.type;
+        const type = normalizeContentType(req.params.type);
         const id = req.params.id;
         if (!VALID_CONTENT_TYPES.includes(type)) {
             res.status(400).json({ error: '无效的内容类型' });
@@ -315,7 +341,7 @@ const SAFE_TABLE_MAP = {
 // PUT /api/admin/:type/:id/restore — 恢复软删除记录
 router.put('/:type/:id/restore', (req, res, next) => {
     try {
-        const type = req.params.type;
+        const type = normalizeContentType(req.params.type);
         const id = req.params.id;
         if (!SOFT_DELETE_TYPES.includes(type)) {
             res.status(400).json({ error: '无效的资源类型，仅支持: competitions, posts, resources, recruitments' });
