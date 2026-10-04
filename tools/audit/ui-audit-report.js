@@ -27,7 +27,9 @@ process.stdin.on('end', () => {
   if (r.pageIssues && r.pageIssues.length) parts.push(`页面: ${r.pageIssues.join('；')}`)
   if (r.failedCount) parts.push(`按钮失败 ${r.failedCount}`)
 
-  const head = `  ${r.page} | 可点 ${r.clickable} 已点 ${r.clicked} 跳过 ${r.skippedCount} | ${
+  const head = `  ${r.page} | 可点 ${r.clickable} 已点 ${r.clicked}${
+    r.overflow ? ` 超限未点 ${r.overflow}` : ''
+  } 跳过 ${r.skippedCount} | ${
     parts.length ? '⚠ ' + parts.join(' / ') : '✓ 全部正常'
   } (${r.ms}ms)`
   console.log(head)

@@ -94,6 +94,23 @@
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
+  // ---------- 导航兜底拦截 ----------
+  // 页面上有 <a href="/api/xxx/download" target="_blank"> 这类「下载/导出」链接。
+  // 自动化浏览器里 target=_blank 可能退化成当前标签页跳转，一旦整页跳到 /api/，
+  // 正在执行的审计脚本 JS 上下文就被销毁 → eval 永远不返回（表现为连接超时）。
+  // 在捕获阶段直接拦掉，保证 SPA 不被带走。
+  if (window.__auditNavGuard) window.removeEventListener('click', window.__auditNavGuard, true)
+  window.__auditNavGuard = (e) => {
+    const a = e.target && e.target.closest && e.target.closest('a[href]')
+    if (!a) return
+    const href = a.getAttribute('href') || ''
+    if (href.startsWith('/api/') || a.hasAttribute('download')) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
+  window.addEventListener('click', window.__auditNavGuard, true)
+
   // ---------- 页面体检 ----------
   const pageIssues = []
   const bodyText = (document.body.innerText || '').trim()
@@ -145,9 +162,13 @@
   }
 
   const CLICK_DESTRUCTIVE = window.__AUDIT_CLICK_DESTRUCTIVE === true
+  // 单页点击上限：数据密集页（如资料库 47 个链接）逐个点击会让单次 eval 超时，
+  // 导致整页结果丢失。超出的元素只统计不点击，并在报告里标注。
+  const MAX_CLICKS = Number(window.__AUDIT_MAX_CLICKS) || 24
   const total = collect().length
   const results = []
   const skipped = []
+  let overflow = 0
 
   for (let i = 0; i < total; i++) {
     // 确保回到原始页面（上一次点击可能跳走了）
@@ -169,6 +190,12 @@
 
     if (isDestructive && !CLICK_DESTRUCTIVE) {
       skipped.push(info)
+      continue
+    }
+
+    // 超出上限的只记录不点击，避免单次 eval 超时丢掉整页结果
+    if (results.length >= MAX_CLICKS) {
+      overflow++
       continue
     }
 
@@ -196,6 +223,14 @@
     if (net.length) problems.push(`请求失败: ${net.slice(0, 2).map((n) => `${n.status} ${n.url}`).join(' | ')}`)
     if (toasts) problems.push(`出现 ${toasts} 个错误提示`)
 
+    // 自诊断：点击后如果跳到了 /api/... （下载/导出类端点直接在当前标签页打开了），
+    // 说明这个元素本该被过滤却漏了。记录出来便于修正过滤规则，
+    // 否则浏览器会停在 JSON 响应页上，导致后续所有元素的索引整体错位。
+    const wentToApi = location.pathname.startsWith('/api/')
+    if (wentToApi) {
+      problems.push(`点击后跳出了 SPA（${location.pathname}）——该元素应加入过滤规则`)
+    }
+
     results.push({
       ...info,
       ok: problems.length === 0,
@@ -205,7 +240,11 @@
     })
 
     // 还原现场
-    if (navigated) {
+    if (wentToApi) {
+      // 停在 /api/ 上时 history.back() 与 agent-browser open 都可能失效，用 location.replace 强制复位
+      location.replace(origPath)
+      await sleep(700)
+    } else if (navigated) {
       history.back()
       await sleep(450)
     } else {
@@ -221,6 +260,7 @@
     pageIssues,
     clickable: total,
     clicked: results.length,
+    overflow,
     failedCount: failed.length,
     failed,
     skippedCount: skipped.length,

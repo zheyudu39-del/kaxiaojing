@@ -79,14 +79,14 @@ export default function TeamMatch() {
                 : []
 
             return (
-              <Col key={m.user_id ?? idx} xs={24} sm={12} lg={8}>
+              <Col key={m.id ?? idx} xs={24} sm={12} lg={8}>
                 <Card size="small" styles={{ body: { padding: 16 } }}>
                   <Space align="start" style={{ width: '100%' }}>
                     <Avatar size={48} src={m.avatar_url || undefined} icon={<UserOutlined />} />
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <Link to={`/users/${m.user_id}`} style={{ fontSize: 15, fontWeight: 500 }}>
-                          {m.username || `用户 #${m.user_id}`}
+                        <Link to={`/users/${m.id}`} style={{ fontSize: 15, fontWeight: 500 }}>
+                          {m.username || `用户 #${m.id}`}
                         </Link>
                         {typeof m.match_score === 'number' && (
                           <Tag color="blue">匹配度 {Math.round(m.match_score)}</Tag>
@@ -117,7 +117,7 @@ export default function TeamMatch() {
                   </Space>
 
                   <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-                    <Link to={`/users/${m.user_id}`} style={{ flex: 1 }}>
+                    <Link to={`/users/${m.id}`} style={{ flex: 1 }}>
                       <Button block size="small">
                         查看主页
                       </Button>
